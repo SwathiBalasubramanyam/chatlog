@@ -1,11 +1,15 @@
 class Api::SessionsController < ApplicationController
 
-  before_action :require_logged_in, only: [:show, :destroy]
+  before_action :require_logged_in, only: [:destroy]
   before_action :require_logged_out, only: [:create]
 
   def show
-    @user = @current_user
-    render "api/users/show"
+    if current_user
+      @user = @current_user
+      render 'api/users/show'
+    else
+      render json: {user: nil}
+    end
   end
 
   def create

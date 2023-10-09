@@ -3,7 +3,7 @@ class ApplicationController < ActionController::API
     before_action :snake_case_params, :attach_authenticity_token
 
     include ActionController::RequestForgeryProtection
-  
+    
     protect_from_forgery with: :exception
 
     rescue_from StandardError, with: :unhandled_error
@@ -50,7 +50,7 @@ class ApplicationController < ActionController::API
     def invalid_authenticity_token
         render json: { message: 'Invalid authenticity token' }, status: :unprocessable_entity
     end
-      
+
     def unhandled_error(error)
         if request.accepts.first.html?
             raise error
