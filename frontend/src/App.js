@@ -2,15 +2,19 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 import LoginFormPage from "./components/LoginFormPage";
 import SignupFormPage from "./components/SignupFormPage";
+import HomePage from "./components/HomePage"
 
 const App = () => {
   return (
     <Switch>
-      <Route path="/login">
+      <Route path="/signin">
         <LoginFormPage/>
       </Route>
-      <Route path="/signup">
+      <Route path="/get-started">
         <SignupFormPage/>
+      </Route>
+      <Route >
+        <HomePage></HomePage>
       </Route>
     </Switch>
   )
