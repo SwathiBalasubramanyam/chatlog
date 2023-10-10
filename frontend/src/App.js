@@ -3,6 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import LoginFormPage from "./components/LoginFormPage";
 import SignupFormPage from "./components/SignupFormPage";
 import HomePage from "./components/HomePage"
+import "./reset.css";
 
 const App = () => {
   return (
