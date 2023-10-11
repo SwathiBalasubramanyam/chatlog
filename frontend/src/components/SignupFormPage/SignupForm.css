@@ -43,7 +43,21 @@
     color: white;
     font-weight: bold;
     padding: 10px 10px;
-	width: 370px;
+	width: 365px;
     height: 40px;
     font-size: 16px
+}
+
+.signup-or {
+    text-align: center;
+}
+
+.signup-demo-btn {
+    margin: 1% 20% 1% 18%;
+    border-radius: 5px;
+    background-color: #611f69;
+    text-align: center;
+    padding: 10px 10px;
+	width: 350px;
+    height: 20px;
 }

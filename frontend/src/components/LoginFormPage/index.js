@@ -5,6 +5,7 @@ import { Redirect } from 'react-router-dom';
 import "./LoginForm.css";
 import SlackLogo from "../../images/slack-logo.png";
 import { Link } from 'react-router-dom';
+import DemoButton from '../DemoButton';
 
 function LoginFormPage() {
   const dispatch = useDispatch();
@@ -65,6 +66,10 @@ function LoginFormPage() {
             <button type="submit">Sign In With Email</button>
           </form>
         </div>
+        <div className="signin-or">OR</div>
+            <div className="signin-demo-btn">
+                <DemoButton></DemoButton>
+            </div>
       </div>
     </div>
   );

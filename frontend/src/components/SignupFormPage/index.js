@@ -5,6 +5,7 @@ import * as sessionActions from "../../store/session";
 import { Link } from "react-router-dom";
 import SlackLogo from "../../images/slack-logo.png";
 import "./SignupForm.css";
+import DemoButton from "../DemoButton";
 
 function SignupFormPage() {
     const dispatch = useDispatch();
@@ -60,6 +61,10 @@ function SignupFormPage() {
                         <button type="submit">Continue</button>
                     </form>
                 </div>
+            </div>
+            <div className="signup-or">OR</div>
+            <div className="signup-demo-btn">
+                <DemoButton></DemoButton>
             </div>
         </div>
 
