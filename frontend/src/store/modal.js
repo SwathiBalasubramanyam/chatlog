@@ -7,8 +7,6 @@ export const updateModalState = () => {
 }
 
 const modalReducers = (state = {modalOpen: false}, action) => {
-    console.log(state);
-    console.log(action);
     let nextState = {...state};
     switch (action.type) {
         case UPDATE_MODAL_STATE:

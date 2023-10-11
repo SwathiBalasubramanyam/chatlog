@@ -81,6 +81,4 @@ test:
 #
 production:
   <<: *default
-  database: chatlog_production
-  username: chatlog
-  password: <%= ENV["CHATLOG_DATABASE_PASSWORD"] %>
+  url: <%= ENV['DATABASE_URL'] %>
