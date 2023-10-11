@@ -25,7 +25,7 @@ function SignupFormPage() {
         emailErrors = errors.filter(error => error.includes("Email"));
     }
 
-    if (sessionUser) return <Redirect to="/" />;
+    if (sessionUser) return <Redirect to="/signin/workspaces" />;
 
     const handleSubmit = (e) => {
         e.preventDefault();
