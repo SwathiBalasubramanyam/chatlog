@@ -18,7 +18,12 @@ ApplicationRecord.transaction do
     puts "Creating users..."
     # Create one user with an easy to remember username, email, and password:
     User.create!(
-      email: 'demo@chatlog.com', 
+      email: 'demo1@chatlog.com', 
+      password: 'chatlog'
+    )
+
+    User.create!(
+      email: 'demo2@chatlog.com', 
       password: 'chatlog'
     )
   

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import SlackLogo from "../../images/slack-logo.png";
-import "./HomePageNavBar.css"
+import "./HomePageNavBar.css";
+import DemoButton from "../DemoButton";
 
 const HomePageNavBar = ({links}) => {
     return (
@@ -15,7 +16,7 @@ const HomePageNavBar = ({links}) => {
             </div>
             <nav className="nav-list">
                 <Link to="/signin"> Sign in </Link>
-                <Link to="/demo-signin"> TRY A DEMO </Link>
+                <DemoButton></DemoButton>
                 <Link to="/get-started"> SIGNUP HERE </Link>
             </nav>
         </nav>

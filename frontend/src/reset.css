@@ -52,12 +52,22 @@ h1 {
 }
 
 h2 {
-    font-size: 50px;
+    font-size: 48px;
     font-weight: bold;
 }
 
 h3 {
-    font-size: 50px;
+    font-size: 37px;
+    font-weight: bold;
+}
+
+h4 {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+h5 {
+    font-size: 26px;
     font-weight: bold;
 }
 
@@ -66,7 +76,23 @@ h3 {
 	font-size: 16px;
 }
 
+input {
+    font-size: 18px;
+	padding-left: 10px;
+	width: 350px;
+    height: 35px;
+}
+
 input:focus {
 	outline: none;
 	border: 2px solid rgb(133, 179, 195);
+}
+
+.errors li{
+	padding-top: 10px;
+	text-align: center;
+	width: 360px;
+    height: 35px;
+	background-color: rgb(220, 167, 175);
+	border: 2px solid lightcoral;
 }

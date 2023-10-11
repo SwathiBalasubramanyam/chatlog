@@ -1,0 +1,73 @@
+.demo-modal-background{
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(25, 25, 25, .5);
+    z-index: 3;
+}
+
+.demo-modal-foreground{
+    height: 500px;
+    width: 600px;
+    background-color: whitesmoke;
+    z-index: 4;
+    position: absolute;
+    top:calc(50% - 250px);
+    left:calc(50% - 300px);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: black;
+}
+
+.demo-modal-foreground > * {
+    margin: 2%;
+    width: 80%;
+}
+
+.modal-title {
+    margin-top: 10%;
+    display: flex;
+    justify-content:space-between;
+}
+
+.modal-title h4{
+    padding-left: 50px;
+    color: #541554;
+}
+
+.modal-title button{
+    outline: none;
+    border-style: none;
+    background-color: transparent;
+    color: #541554;
+}
+
+.modal-title button:hover{
+    opacity: 1;
+}
+
+.modal-instructions {
+    list-style: decimal;
+}
+
+.modal-instructions strong{
+    color: #541554;
+    font-weight: bold;
+}
+
+.modal-signin-btns {
+    display: flex;
+    justify-content: space-around;
+}
+
+.modal-signin-cta {
+    background: #541554 !important;
+    border-style: none;
+    color: white;
+    width: 200px;
+    height: 40px;
+}

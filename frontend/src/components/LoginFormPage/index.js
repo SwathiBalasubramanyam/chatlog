@@ -57,7 +57,7 @@ function LoginFormPage() {
         </div>
         <div className='signin-get-started'>
           <form className='signin-form-form' onSubmit={handleSubmit}>
-            <ul className='hidden'>
+            <ul className={errors.length ? "errors": "hidden"}>
               {errors.map(error => <li key={error}>{error}</li>)}
             </ul>
             <input type="text" placeholder="name@work-email.com" value={email} onChange={(e) => setEmail(e.target.value)} required/>

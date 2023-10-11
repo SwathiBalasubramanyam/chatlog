@@ -1,6 +1,7 @@
 import HomePageNavBar from "../HomePageNavBar";
 import HomePageMaincontent from "../HomePageMainContent";
-import "./HomePage.css"
+import "./HomePage.css";
+import {useState } from "react";
 
 const HomePage = () => {
     const links = {

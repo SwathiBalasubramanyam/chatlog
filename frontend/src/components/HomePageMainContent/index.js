@@ -11,6 +11,7 @@ import TargetLogo from "../../images/target-logo.png";
 import NytLogo from "../../images/nyt.png";
 import EtsyLogo from "../../images/logo-etsy.png";
 import "./HomePageMainContent.css";
+import DemoButton from "../DemoButton";
 
 const HomePageMaincontent = ({links}) => {
     return (
@@ -25,7 +26,7 @@ const HomePageMaincontent = ({links}) => {
                         </p>
                         <div className="billboard-header-cta">
                             <Link to="/get-started">SIGN UP HERE</Link>
-                            <Link to="/demo-signin">TRY A DEMO</Link>
+                            <DemoButton></DemoButton>
                         </div>
                         <p className="billboard-header-copy">
                             <strong>ChatLog is free to try</strong> for as long as you'd like
@@ -79,7 +80,7 @@ const HomePageMaincontent = ({links}) => {
                 <h3>See all you can accomplish with ChatLog</h3>
                 <div className="billboard-header-cta">
                     <Link to="/get-started">SIGN UP HERE</Link>
-                    <Link to="/demo-signin">TRY A DEMO</Link>
+                    <DemoButton></DemoButton>
                 </div>
             </section>
             <section className="home-page-footer">

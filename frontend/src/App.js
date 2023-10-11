@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Route, Switch } from "react-router-dom";
 import LoginFormPage from "./components/LoginFormPage";
 import SignupFormPage from "./components/SignupFormPage";
@@ -15,7 +15,7 @@ const App = () => {
         <SignupFormPage/>
       </Route>
       <Route >
-        <HomePage></HomePage>
+        <HomePage/>
       </Route>
     </Switch>
   )
