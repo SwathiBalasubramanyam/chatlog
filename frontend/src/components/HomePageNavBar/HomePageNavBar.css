@@ -36,6 +36,7 @@
 
 .personal-links > *{
     padding: 10px;
+    color: white;
 }
 
 .nav-list {
@@ -48,6 +49,7 @@
     margin: 0 10px;
     padding: 10px 25px;
     text-align: center;
+    color: white;
 }
 
 .nav-list a:nth-child(2) {

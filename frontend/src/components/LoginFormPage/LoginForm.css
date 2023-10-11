@@ -1,0 +1,80 @@
+.signin-page-header{
+    margin: 2% 3% 0% 3%;
+    display:flex;
+    justify-content: center;
+}
+
+.signin-page-header > * {
+    width: 33%;
+}
+
+.center-col-link{
+    display: flex;
+    justify-content: center;
+    color: black;
+    font-size: 20px;
+    font-weight: 600;
+    margin: 1%;
+}
+
+.center-col-link > * {
+    padding: 0.5%;
+    text-align: center;
+}
+
+.right-col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    font-size: 13px;
+    color: #454245;
+}
+
+.right-col > * {
+    padding: 0.5px;
+}
+
+.right-col a{
+    font-size: 15px;
+    font-weight: 700;
+    color: #1264a3;
+}
+
+.signin-form {
+    margin: 0 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.signin-form > * {
+    padding: 1% 5% 0 5%;
+}
+
+.signin-form-sub-heading {
+    color: #454245;
+}
+
+.signin-form-sub-heading strong{
+    font-weight: bold;
+}
+
+.signin-form-form{
+    display: flex;
+    flex-direction: column;
+    font-size: 18px;
+}
+
+.signin-form-form > * {
+    border: 1px solid rgba(29,28,29,.3);
+    margin: 2%;
+    padding: 15px 100px;
+    border-radius: 4px;
+    transition: border 80ms ease-out,box-shadow 80ms ease-out
+}
+.signin-form-form button{
+    background-color: #611f69;
+    color: white;
+    font-weight: bold;
+}
+

@@ -12,9 +12,7 @@ import NytLogo from "../../images/nyt.png";
 import EtsyLogo from "../../images/logo-etsy.png";
 import "./HomePageMainContent.css";
 
-const HomePageMaincontent = () => {
-    let linkedinHandle = "https://www.linkedin.com/in/swathi-balasubramanyam-4a4280124/";
-    let githubHandle = "https://github.com/SwathiBalasubramanyam";
+const HomePageMaincontent = ({links}) => {
     return (
         <main className="home-page-main">
             <section className="billboard">
@@ -86,7 +84,6 @@ const HomePageMaincontent = () => {
             </section>
             <section className="home-page-footer">
                 <img src={SlackLogo}></img>
-                
             </section>
         </main>
 

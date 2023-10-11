@@ -3,10 +3,14 @@ import HomePageMaincontent from "../HomePageMainContent";
 import "./HomePage.css"
 
 const HomePage = () => {
+    const links = {
+        linkedinHandle: "https://www.linkedin.com/in/swathi-balasubramanyam-4a4280124/",
+        githubHandle: "https://github.com/SwathiBalasubramanyam"
+    }
     return(
         <main className="home-page">
-            <HomePageNavBar></HomePageNavBar>
-            <HomePageMaincontent></HomePageMaincontent>
+            <HomePageNavBar links={links}></HomePageNavBar>
+            <HomePageMaincontent links={links}></HomePageMaincontent>
         </main>
     )
 }

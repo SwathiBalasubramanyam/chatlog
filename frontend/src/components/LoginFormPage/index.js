@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import * as sessionActions from '../../store/session';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import "./LoginForm.css"
+import "./LoginForm.css";
+import SlackLogo from "../../images/slack-logo.png";
+import { Link } from 'react-router-dom';
 
 function LoginFormPage() {
   const dispatch = useDispatch();
@@ -31,30 +33,40 @@ function LoginFormPage() {
     }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <ul>
-        {errors.map(error => <li key={error}>{error}</li>)}
-      </ul>
-      <label>
-        Email
-        <input
-          type="text"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        Password
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-      </label>
-      <button type="submit">Log In</button>
-    </form>
+    <div className="signin-page">
+      <div className='signin-page-header'>
+        <div className="left-col"></div>
+        <div className="center-col">
+          <Link className="center-col-link" to="/">
+            <img src={SlackLogo} style={{height: "25px", width: "25px"}}></img>
+            <h4>ChatLog</h4>
+          </Link>
+        </div>
+        <div className="right-col">
+          <div className="sidelink">New to ChatLog?
+          </div>
+          <Link to="/get-started">Create an account</Link>
+        </div>
+      </div>
+      <div className="signin-form">
+        <div className='signin-form-heading'>
+          <h2>Sign in to ChatLog</h2>
+        </div>
+        <div className='signin-form-sub-heading'>We suggest using the
+          <strong> email address you use at work.</strong>
+        </div>
+        <div className='signin-get-started'>
+          <form className='signin-form-form' onSubmit={handleSubmit}>
+            <ul className='hidden'>
+              {errors.map(error => <li key={error}>{error}</li>)}
+            </ul>
+            <input type="text" placeholder="name@work-email.com" value={email} onChange={(e) => setEmail(e.target.value)} required/>
+            <input type="password" placeholder="password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
+            <button type="submit">Sign In With Email</button>
+          </form>
+        </div>
+      </div>
+    </div>
   );
 }
 
