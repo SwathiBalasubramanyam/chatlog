@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import SlackLogo from "../../images/slack-logo.png";
 import "./SignupForm.css";
 import DemoButton from "../DemoButton";
+import FormError from "../FormErrors";
 
 function SignupFormPage() {
     const dispatch = useDispatch();
@@ -13,6 +14,16 @@ function SignupFormPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState([]);
+
+    let passwordErrors = [];
+    let emailErrors = [];
+
+    if (errors.length > 0 && typeof errors[0] !== "string") {
+        passwordErrors = ["Invalid credentials"]
+    } else {
+        passwordErrors = errors.filter(error => error.includes("Password"));
+        emailErrors = errors.filter(error => error.includes("Email"));
+    }
 
     if (sessionUser) return <Redirect to="/" />;
 
@@ -53,18 +64,21 @@ function SignupFormPage() {
                 <strong> email address you use at work.</strong>
                 <div className="signup-get-started">
                     <form className="signup-form-form" onSubmit={handleSubmit}>
-                        <ul className={errors.length ? "errors" : "hidden"}>
-                            {errors.map(error => <li className={errors.length ? "errors" : "hidden"} key={error}>{error}</li>)}
-                        </ul>
-                        <input type="text" placeholder="name@work-email.com" value={email} onChange={(e) => setEmail(e.target.value)} required/>
-                        <input type="password" placeholder="password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
+                        <div className="input-container">
+                            <input type="text" placeholder="name@work-email.com" value={email} onChange={(e) => setEmail(e.target.value)} required/>
+                            <ul>{emailErrors.map((emailError) => (<FormError error={emailError} />))}</ul>
+                        </div>
+                        <div className="input-container">
+                            <input type="password" placeholder="password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
+                            <ul>{passwordErrors.map((passwordError) => (<FormError error={passwordError} />))}</ul>
+                        </div>
                         <button type="submit">Continue</button>
                     </form>
+                    <div className="signup-or">OR</div>
+                    <div className="signup-demo-btn">
+                        <DemoButton></DemoButton>
+                    </div>
                 </div>
-            </div>
-            <div className="signup-or">OR</div>
-            <div className="signup-demo-btn">
-                <DemoButton></DemoButton>
             </div>
         </div>
 
