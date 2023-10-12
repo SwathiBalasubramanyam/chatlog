@@ -10,6 +10,11 @@ class User < ApplicationRecord
     validates :password, length: {in: 6..255}, allow_nil: true
     validates :session_token, presence: true, uniqueness: true
 
+    has_many :workspaces,
+        class_name: :Workspace,
+        primary_key: :id,
+        foreign_key: :owner_id
+
 
     def self.find_by_credentials(email, password)
         user = User.find_by(email: email)

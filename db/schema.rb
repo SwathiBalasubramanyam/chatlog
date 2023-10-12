@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_09_172506) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_12_055656) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -28,4 +28,29 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_09_172506) do
     t.index ["session_token"], name: "index_users_on_session_token", unique: true
   end
 
+  create_table "workspace_members", force: :cascade do |t|
+    t.bigint "member_id", null: false
+    t.bigint "workspace_id", null: false
+    t.string "title"
+    t.integer "status", default: 0
+    t.string "role"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_workspace_members_on_member_id"
+    t.index ["workspace_id"], name: "index_workspace_members_on_workspace_id"
+  end
+
+  create_table "workspaces", force: :cascade do |t|
+    t.bigint "owner_id", null: false
+    t.string "name", null: false
+    t.string "url"
+    t.string "icon"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_workspaces_on_name", unique: true
+    t.index ["owner_id"], name: "index_workspaces_on_owner_id"
+  end
+
+  add_foreign_key "workspace_members", "users", column: "member_id"
+  add_foreign_key "workspaces", "users", column: "owner_id"
 end
