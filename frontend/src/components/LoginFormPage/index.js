@@ -10,7 +10,7 @@ import FormError from '../FormErrors';
 
 function LoginFormPage() {
   const dispatch = useDispatch();
-  const sessionUser = useSelector(state => state.session.user);
+  const sessionUser = useSelector(state => state.session.currentUser);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState([]);
@@ -24,8 +24,12 @@ function LoginFormPage() {
       passwordErrors = errors.filter(error => error.includes("Password"));
       emailErrors = errors.filter(error => error.includes("Email"));
   }
+  debugger;
 
-  if (sessionUser) return <Redirect to="/signin/workspaces" />;
+  if (sessionUser){
+    return <Redirect to="/signin/workspaces"/>
+  }
+    
 
   const handleSubmit = (e) => {
     e.preventDefault();

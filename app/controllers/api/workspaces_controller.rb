@@ -12,7 +12,14 @@ class Api::WorkspacesController < ApplicationController
     @workspace = Workspace.new(workspace_params)
     @workspace.owner_id = @current_user.id
     if @workspace.save
-      render "api/workspaces/show"
+      WorkspaceMember.create!(member_id: @current_user.id, workspace_id: @workspace.id, role: "admin")
+      Channel.create!(owner_id: @current_user.id, workspace_id: @workspace.id, 
+        name: :general, description: "This channel is for team-wide communication and announcements. All team members are in this channel.")
+
+      Channel.create!(owner_id: @current_user.id, workspace_id: @workspace.id, 
+      name: :random, description: "This channel is for... well, everything else. It's a place for team jokes, spur-of-the-moment ideas, and funny GIFs. Go wild!")
+
+      render "api/workspaces/create"
     else
       render json: {errors: @workspace.errors.full_messages}, status: 422
     end
@@ -26,13 +33,13 @@ class Api::WorkspacesController < ApplicationController
   def update
     @workspace = Workspace.find(params[:id])
     if @workspace.update(workspace_params)  
-      render "api/workspaces/show"
+      render "api/workspaces/create"
     else
       render json: {errors: @workspace.errors.full_messages}, status: 422
-
     end  
   end
 
+  private
   def workspace_params
     params.require("workspace").permit(:name, :url, :icon)
   end

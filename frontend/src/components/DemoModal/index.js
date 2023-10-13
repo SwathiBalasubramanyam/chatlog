@@ -7,16 +7,17 @@ const DemoModal = ({closeModal}) => {
     const dispatch = useDispatch();
 
     const logDemo1 = () => {
-        dispatch(sessionActions.login("demo1@chatlog.com", "chatlog"))
         closeModal();
+        console.log("what happens after you closemodal");
+        debugger;
+        dispatch(sessionActions.login("demo1@chatlog.com", "chatlog"))
+        
     }
 
     const logDemo2 = () => {
-        dispatch(sessionActions.login("demo2@chatlog.com", "chatlog"))
         closeModal();
+        dispatch(sessionActions.login("demo2@chatlog.com", "chatlog"))
     }
-
-    console.log("I am actually opening the modal");
 
     return(
         <div className="demo-modal-background" onClick={closeModal}>

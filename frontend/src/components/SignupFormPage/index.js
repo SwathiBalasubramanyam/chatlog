@@ -10,7 +10,7 @@ import FormError from "../FormErrors";
 
 function SignupFormPage() {
     const dispatch = useDispatch();
-    const sessionUser = useSelector(state => state.session.user);
+    const sessionUser = useSelector(state => state.session.currentUser);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState([]);

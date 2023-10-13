@@ -12,8 +12,11 @@ import NytLogo from "../../images/nyt.png";
 import EtsyLogo from "../../images/logo-etsy.png";
 import "./HomePageMainContent.css";
 import DemoButton from "../DemoButton";
+import { useSelector } from "react-redux";
+import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 
-const HomePageMaincontent = ({links}) => {
+const HomePageMaincontent = () => {
+    
     return (
         <main className="home-page-main">
             <section className="billboard">

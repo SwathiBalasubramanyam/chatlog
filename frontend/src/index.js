@@ -7,12 +7,16 @@ import App from "./App";
 import configureStore from "./store";
 import * as sessionActions from "./store/session";
 import { updateModalState } from "./store/modal";
+import * as workspaceActions from "./store/workspaces";
+import csrfFetch from "./store/csrf";
 
 const store = configureStore();
 
 if (process.env.NODE_ENV !== "production") {
   window.store = store;
+  window.csrfFetch =csrfFetch;
   window.sessionActions = sessionActions;
+  window.workspaceActions = workspaceActions;
   window.updateModalState = updateModalState;
 }
 
@@ -39,6 +43,7 @@ if (
   sessionStorage.getItem("currentUser") === null ||
   sessionStorage.getItem("X-CSRF-Token") === null 
 ) {
+  console.log("restore session being called");
   store.dispatch(sessionActions.restoreSession()).then(renderApplication);
 } else {
   renderApplication();
