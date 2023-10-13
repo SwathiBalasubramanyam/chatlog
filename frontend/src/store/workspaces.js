@@ -65,7 +65,7 @@ const workspaceReducer = (state = {}, action) => {
             nextState = action.workspaces
             return nextState;
         case RECEIVE_WORKSPACE:
-            nextState[action.workspace.id]= action.workspace
+            nextState[action.workspace.id] = action.workspace
             return nextState;
         default:
             return state;

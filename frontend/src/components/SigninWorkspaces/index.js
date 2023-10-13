@@ -19,14 +19,14 @@ const SigninWorkspaces = () => {
 
     useEffect(() => {
         if(sessionUser){
-            dispatch(fetchWorkspaces())
+            dispatch(fetchWorkspaces());
         }
     }, [])
-
+    
     if(!sessionUser) {
         return <Redirect to="/" />;
     } 
-
+    
     if(sessionWorkspace) {
         return <Redirect to={`/workspace/${sessionWorkspace.id}`}/>
     } else {

@@ -21,7 +21,7 @@ class Api::WorkspacesController < ApplicationController
 
       render "api/workspaces/create"
     else
-      render json: {errors: @workspace.errors.full_messages}, status: 422
+      render json: {errors: @workspace.errors.full_messages}, status: :unprocessable_entity
     end
   end
 
@@ -31,11 +31,15 @@ class Api::WorkspacesController < ApplicationController
   end
 
   def update
-    @workspace = Workspace.find(params[:id])
+    @workspace = Workspace.find(params[:id], owner_id: @current_user.id)
+    if !@workspace
+      render json: {errors: ["Only admins can edit a workspace"]}, status: 404
+    end
+
     if @workspace.update(workspace_params)  
       render "api/workspaces/create"
     else
-      render json: {errors: @workspace.errors.full_messages}, status: 422
+      render json: {errors: @workspace.errors.full_messages}, status: :unprocessable_entity
     end  
   end
 

@@ -9,10 +9,9 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     resource :session, only: [:show, :create, :destroy]
     resources :users, only: [:create, :show, :update]
-    resources :workspaces, only: [:create, :index, :update, :show]
-    resources :workspaces do
+    resources :workspaces,  only: [:create, :index, :update, :show] do
       resources :workspace_members, only: [:create, :update, :index]
-      resources :channels, only: [:create, :update, :index]
+      resources :channels, only: [:create, :update, :index, :show]
     end
   end
 

@@ -55,11 +55,10 @@ export const signup = (user) => {
 }
 
 export const logout = () => {
-    return async(dispatch) => {
-        const res = await csrfFetch('/api/session', {method: 'DELETE'})
+    return (dispatch) => {
         dispatch(setCurrentworkspace());
         dispatch(setCurrentUser());
-        return res;
+        csrfFetch('/api/session', {method: 'DELETE'})
     }
 }
 

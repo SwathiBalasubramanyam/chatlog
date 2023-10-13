@@ -37,8 +37,13 @@ class ApplicationController < ActionController::API
         session[:session_token] = nil
     end
 
-    private
+    def require_workspace_member
+        if !@current_user.workspace_ids.include?(params[:workspace_id].to_i)
+            render json: {errors: ["You dont have permission on this workspace"]}, status: 401
+        end
+    end
 
+    private
     def snake_case_params
         params.deep_transform_keys!(&:underscore)
     end

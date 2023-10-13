@@ -41,12 +41,6 @@ class Api::WorkspaceMembersController < ApplicationController
 
   private
   def workspace_member_params
-    print "*********"
-    print "this is what we are getting from params"
-    print params
-
-    print "thats the end of it "
-    print "*********"
     params.require("workspace_member").permit(:workspace_id, :title, :status, :role)
   end
 end
