@@ -1,0 +1,70 @@
+.home-page-nav-bar-background {
+    padding: 1% 15%;
+}
+
+.home-page-nav-bar-foreground {
+    display: flex;
+    justify-content: space-around;
+}
+
+.home-page-nav-bar-foreground > * {
+    width: 50%;
+}
+
+.logo-links {
+    display: flex;
+}
+
+.personal-links {
+    display: flex;
+    align-items: center;
+    padding: 0% 20% 0% 5%;
+}
+
+.personal-links > * {
+    padding-right: 20%
+}
+
+.div-nav-list {
+    display: flex;
+    justify-content: center;
+}
+
+.div-nav-list > * {
+    margin: 2%;
+    align-self: center;
+    padding: 1% 1%;
+    border-radius: 6px;
+}
+
+.div-nav-list a:nth-child(3) {
+    color: #541554;
+    border: 4px solid white;
+    background-color: white;
+}
+
+.footer-tech-used {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.footer-tech-used > * {
+    font-size: 10px;
+    padding: 2%;
+}
+
+.btn-logout {
+    border-style: none;
+    width: 10%;
+    border-radius: 6px;
+}
+
+.div-nav-list .try-demo-btn {
+    color: white;
+    border-style: none;
+    padding: 8px 20px;
+    font-size: 16px;
+    background-color: transparent;
+    border: 2px solid white;
+}

@@ -1,0 +1,16 @@
+.chatlog-logo {
+    display: flex;
+    justify-content: flex-start;
+    align-self: center;
+}
+
+.chatlog-logo > * {
+    align-self: center;
+    font-weight: bold;
+    padding: 2% 2%;
+}
+
+.chatlog-logo-logo {
+    width: 35px;
+    height: 35px;
+}

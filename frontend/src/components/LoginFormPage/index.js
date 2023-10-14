@@ -5,7 +5,6 @@ import { Redirect } from 'react-router-dom';
 import "./LoginForm.css";
 import SlackLogo from "../../images/slack-logo.png";
 import { Link } from 'react-router-dom';
-import DemoButton from '../DemoButton';
 import FormError from '../FormErrors';
 
 function LoginFormPage() {
@@ -85,7 +84,7 @@ function LoginFormPage() {
           </form>
           <div className="signin-or">OR</div>
           <div className="signin-demo-btn">
-              <DemoButton></DemoButton>
+              {/* <DemoButton></DemoButton> */}
           </div>
         </div>
       </div>

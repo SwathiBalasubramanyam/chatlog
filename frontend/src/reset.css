@@ -28,7 +28,7 @@ footer, header, hgroup, menu, nav, section {
 body {
 	font-family: Slack-Circular-Pro,"Helvetica Neue",Helvetica,"Segoe UI",Tahoma,Arial,sans-serif;
     font-size: 16px;
-	line-height: 1.1;
+	line-height: 1;
 }
 ol, ul {
 	list-style: none;
@@ -44,6 +44,12 @@ q:before, q:after {
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
+}
+
+/* TODO Add site wide styles */
+body {
+	font-family: Slack-Circular-Pro,"Helvetica Neue",Helvetica,"Segoe UI",Tahoma,Arial,sans-serif;
+    font-size: 16px;
 }
 
 h1 {
@@ -77,13 +83,8 @@ h5 {
 }
 
 input {
-    font-size: 18px;
-	padding-left: 10px;
 	width: 350px;
     height: 35px;
-    border: 2px solid rgba(29,28,29,.3);
-    border-radius: 6px;
-    margin: 2%;
 }
 
 input:focus {
@@ -92,10 +93,36 @@ input:focus {
 }
 
 .errors li{
-	padding-top: 10px;
-	text-align: center;
-	width: 360px;
+	width: 350px;
     height: 35px;
+	color: red;
 	background-color: rgb(220, 167, 175);
 	border: 2px solid lightcoral;
+}
+
+video {
+    max-width: 700px;
+    max-height: 400px;
+}
+
+.hidden {
+    display: none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+strong {
+    font-weight: bold;
+}
+
+.purple {
+    background-color: #541554;
+    color: white;
+}
+
+.horchata {
+    background-color: #F4EDE4;
 }

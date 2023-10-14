@@ -5,7 +5,6 @@ import * as sessionActions from "../../store/session";
 import { Link } from "react-router-dom";
 import SlackLogo from "../../images/slack-logo.png";
 import "./SignupForm.css";
-import DemoButton from "../DemoButton";
 import FormError from "../FormErrors";
 
 function SignupFormPage() {
@@ -76,7 +75,7 @@ function SignupFormPage() {
                     </form>
                     <div className="signup-or">OR</div>
                     <div className="signup-demo-btn">
-                        <DemoButton></DemoButton>
+                        {/* <DemoButton></DemoButton> */}
                     </div>
                 </div>
             </div>

@@ -8,6 +8,7 @@ import Workspace from "./components/Workspace";
 import "./reset.css";
 import { useDispatch, useSelector } from "react-redux";
 import * as sessionActions from "./store/session"
+import Modal from "./components/Modal";
 
 const App = () => {
   const sessionUser = useSelector(state => state.session.currentUser)
@@ -20,6 +21,7 @@ const App = () => {
   return (
     <>
       {sessionUser && <button onClick={handleLogout}>Click here to logout from chatlog</button>}
+      <Modal></Modal>
       <Switch>
         <Route path="/workspace/:workspaceId">
           <Workspace/>

@@ -1,20 +1,28 @@
-export const UPDATE_MODAL_STATE = "modals/UPDATE_MODAL_STATE"
+export const OPEN_MODAL = 'OPEN_MODAL';
+export const CLOSE_MODAL = 'CLOSE_MODAL';
 
-export const updateModalState = () => {
+export const openModal = modal => {
     return {
-        type: UPDATE_MODAL_STATE
-    }
-}
+        type: OPEN_MODAL,
+        modal
+    };
+};
 
-const modalReducers = (state = {modalOpen: false}, action) => {
-    let nextState = {...state};
+export const closeModal = () => {
+    return {
+        type: CLOSE_MODAL
+    };
+};
+
+function modalReducer(state = null, action) {
     switch (action.type) {
-        case UPDATE_MODAL_STATE:
-            nextState.modalOpen = !nextState.modalOpen;
-            return nextState;
+        case OPEN_MODAL:
+            return action.modal;
+        case CLOSE_MODAL:
+            return null;
         default:
             return state;
     }
 }
 
-export default modalReducers;
+export default modalReducer;

@@ -5,13 +5,14 @@ import modalReducers from './modal';
 import workspaceReducer from './workspaces';
 import workspaceMemberReducers from './workspaceMembers';
 import channelReducers from './channels';
+import ui from './ui';
 
 const rootReducer = combineReducers({
     session: sessionReducer,
     workspaces: workspaceReducer,
     channels: channelReducers,
     workspaceMembers: workspaceMemberReducers,
-    ui: modalReducers
+    ui: ui
 })
 
 let enhancer;
