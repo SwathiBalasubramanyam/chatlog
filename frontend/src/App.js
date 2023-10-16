@@ -1,14 +1,14 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import LoginFormPage from "./components/LoginFormPage";
-import SignupFormPage from "./components/SignupFormPage";
+import SigninForm from "./components/UserForm/SigninForm";
+import SignupForm from "./components/UserForm/SignupForm";
 import HomePage from "./components/HomePage";
-import SigninWorkspaces from "./components/SigninWorkspaces";
+import WorkspacesPage from "./components/WorkspacesPage";
 import Workspace from "./components/Workspace";
-import "./reset.css";
 import { useDispatch, useSelector } from "react-redux";
 import * as sessionActions from "./store/session"
 import Modal from "./components/Modal";
+import "./reset.css";
 
 const App = () => {
   const sessionUser = useSelector(state => state.session.currentUser)
@@ -27,13 +27,13 @@ const App = () => {
           <Workspace/>
         </Route>
         <Route path="/signin/workspaces">
-          <SigninWorkspaces/>
+          <WorkspacesPage/>
         </Route>
         <Route path="/signin">
-          <LoginFormPage/>
+          <SigninForm/>
         </Route>
         <Route path="/get-started">
-          <SignupFormPage/>
+          <SignupForm/>
         </Route>
         <Route >
           <HomePage/>

@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import * as sessionActions from "../../store/session";
-import * as workspaceMemberActions from "../../store/workspaceMembers";
+import * as sessionActions from "../../../store/session";
+import * as workspaceMemberActions from "../../../store/workspaceMembers";
 
 const WorkspaceItem = ({workspace}) => {
     const sessionUser = useSelector((state) => state.session.currentUser)

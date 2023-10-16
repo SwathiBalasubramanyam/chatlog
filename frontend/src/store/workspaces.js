@@ -19,8 +19,8 @@ export const receiveWorkspace = (workspace) => {
 }
 
 // selectors to avoid re-renders ??
-export const getWorkspaces = () => (state) => {
-    return state?.workspaces ? Object.values(state.workspaces) : []
+export const getWorkspaces = (state) => {
+    return state.workspaces ? state.workspaces : {};
 }
 
 export const fetchWorkspaces = () => {

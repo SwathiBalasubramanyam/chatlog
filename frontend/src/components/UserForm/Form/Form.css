@@ -1,0 +1,111 @@
+.user-form-header{
+    margin: 2% 3% 0% 3%;
+    display:flex;
+    justify-content: center;
+}
+
+.user-form-header > * {
+    width: 33%;
+}
+
+.center-col-link{
+    display: flex;
+    justify-content: center;
+    color: black;
+    font-size: 20px;
+    font-weight: 600;
+    margin: 1%;
+}
+
+.center-col-link > * {
+    padding: 0.5%;
+    text-align: center;
+}
+
+.right-col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    font-size: 13px;
+    color: #454245;
+}
+
+.right-col > * {
+    padding: 0.5px;
+}
+
+.right-col a{
+    font-size: 15px;
+    font-weight: 700;
+    color: #1264a3;
+}
+
+.user-form {
+    margin: 0 28%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.user-form-form-header {
+    display: flex;
+    margin: 1%;
+    flex-direction: column;
+    align-items: center;
+}
+
+.user-form-sub-heading {
+    margin: 2%;
+    color: #454245;
+}
+
+.user-input-form > * {
+    margin: 4%
+}
+
+.user-input-container input {
+    border: 1px solid #454245;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.user-input-form button {
+    border-style: none;
+    width: 356px;
+    height: 35px;
+    color: white;
+    font-size: bold;
+    background-color: #541554;
+    align-self: center;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.form-footer > * {
+    align-self: center;
+    text-align: center;
+}
+
+.form-or {
+    padding-left: 10%;
+    font-size: bold;
+    margin: 2%;
+}
+
+.form-demo-btn {
+    width: 350px;
+    height: 35px;
+    margin-left: 3%;
+    align-self: center;
+}
+
+.form-demo-btn .try-demo-btn{
+    width: inherit;
+    height: inherit;
+    color: white;
+    padding-left: 10%;
+    border-style: none;
+    text-align: center;
+    background-color: #541554;
+    border-radius: 6px;
+}

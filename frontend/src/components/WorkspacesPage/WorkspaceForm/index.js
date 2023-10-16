@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import * as workspaceActions from "../../store/workspaces";
+import * as workspaceActions from "../../../store/workspaces";
 
 const WorkspaceForm = () => {
     const dispatch = useDispatch();

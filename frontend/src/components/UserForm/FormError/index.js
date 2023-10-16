@@ -1,5 +1,5 @@
 import { FiAlertCircle } from 'react-icons/fi';
-import "./FormErrors.css"
+import "./FormError.css"
 
 const FormError = ({error}) => {
     return (

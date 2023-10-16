@@ -85,6 +85,7 @@ h5 {
 input {
 	width: 350px;
     height: 35px;
+    font-size: 16px;
 }
 
 input:focus {
@@ -125,4 +126,8 @@ strong {
 
 .horchata {
     background-color: #F4EDE4;
+}
+
+button {
+    font-size: 16px;
 }

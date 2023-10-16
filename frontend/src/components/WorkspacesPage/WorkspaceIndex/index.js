@@ -5,7 +5,7 @@ import { fetchWorkspaces, getWorkspaces } from "../../store/workspaces";
 import WorkspaceItem from "../WorkspaceItem";
 import WorkspaceForm from "../WorkspaceForm";
 
-const SigninWorkspaces = () => {
+const WorkspaceIndex = () => {
     const dispatch = useDispatch();
     const sessionUser = useSelector((state) => {
         return state.session.currentUser
@@ -42,4 +42,4 @@ const SigninWorkspaces = () => {
     }
 }
 
-export default SigninWorkspaces;
+export default WorkspaceIndex;
