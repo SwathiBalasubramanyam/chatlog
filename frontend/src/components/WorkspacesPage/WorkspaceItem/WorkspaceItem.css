@@ -1,0 +1,38 @@
+.workspace-item {
+    display: flex;
+    height: 85px;
+    border-top: 2px solid #e8e5e8;
+    align-items: center;
+}
+
+.workspace-item-icon {
+    margin: 2% 5%;
+    width: 5%;
+    height: 20px;
+    border: 2px solid #541554;
+    padding-left: 1.5%;
+    padding-right: 1.5%;
+    font-weight: bold;
+    border-radius: 5px;
+    align-content: center;
+    text-align: center;
+    padding-top: 1.5%;
+    padding-bottom: 1.5%;
+}
+
+.workspace-item-name {
+    width: 60%;
+}
+
+.workspace-item-cta {
+    margin: 2% 5%;
+    width: 15%;
+    padding: 1% 2%;
+    background-color: #F4EDE4;
+    border: 2px solid #F4EDE4;
+    border-style: none;
+    border-radius: 5px;
+}
+
+
+

@@ -1,6 +1,5 @@
 import { useDispatch } from "react-redux";
 import * as sessionActions from "../../store/session";
-import { FiX } from "react-icons/fi";
 import { closeModal } from '../../store/modal';
 import "./DemoModal.css";
 
@@ -19,7 +18,7 @@ const DemoModal = () => {
         dispatch(sessionActions.login("demo2@chatlog.com", "chatlog"))
     }
 
-    return(
+    return (
         <div className="demo-modal-body-container">
             <p>Please follow the below instructions carefully to signin as two different users and experience live chat.</p>
             <ul className="modal-instructions">

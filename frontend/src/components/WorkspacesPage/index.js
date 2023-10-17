@@ -1,30 +1,35 @@
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { Redirect, Link } from "react-router-dom";
-import { fetchWorkspaces, getWorkspaces } from "../../store/workspaces";
 import ChatLogLogo from "../ChatLogLogo";
+import WorkspaceIndex from "./WorkspaceIndex";
+import createWorkspaceIcon from "../../images/create-workspace-icon.svg";
+import "./WorkspacesPage.css";
+import * as modalActions from "../../store/modal";
 
 const WorkspacesPage = () => {
     const dispatch = useDispatch();
-    const [sessionUser, sessionWorkspace] = useSelector((state) => {
-        return [state.session.currentUser, state.session.currentWorkspace]
-    });
-    const workspaces = Object.values(useSelector(getWorkspaces));
+    const sessionUser = useSelector((state) => state.session.currentUser);
+    const sessionWorkspace = useSelector((state) => state.session.currentWorkspace)
 
-    useEffect(() => {if(sessionUser) dispatch(fetchWorkspaces())}, [])
-    
     if(!sessionUser) return <Redirect to="/" />;
     
     if(sessionWorkspace) return <Redirect to={`/workspace/${sessionWorkspace.id}`}/>
+
     return (
         <div className="workspaces-index-page">
             <Link className="workspaces-logo-link" to="/"><ChatLogLogo/></Link>
             <div className="workspaces-index-header">
-                <h2><purple>Welcome back!</purple><strong>You look nice today.</strong></h2>
-                <div>Choose a workspace below to get back to working with your team.</div>
+                <div>
+                    <h4>Welcome back! </h4>
+                    <h4><strong> You look nice today.</strong></h4>
+                </div>  
+                <div className="workspaces-index-subheader">Choose a workspace below to get back to working with your team.</div>
             </div>
-            <div className="workspaces-list">
-
+            <WorkspaceIndex/>
+            <div className="workspaces-create-form">
+                <img className="create-workspace-icon" src={createWorkspaceIcon} alt="createWorkspace"></img>
+                <div>Want to use Slack with a different team?</div>
+                <button className="workspace-create-btn" onClick={() => dispatch(modalActions.openModal("createWorkspace"))}>Create Another Workspace</button>
             </div>
             
         </div>

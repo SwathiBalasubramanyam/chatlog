@@ -10,12 +10,12 @@
 
 .modal-foreground {
     max-height: 100%;
-    width: 600px;
+    width: 700px;
     background-color: whitesmoke;
     z-index: 4;
     position: fixed;
     top:calc(50% - 250px);
-    left:calc(50% - 300px);
+    left:calc(50% - 350px);
     border-radius: 15px;
     display: flex;
     flex-direction: column;

@@ -24,6 +24,11 @@ export const removeChannel = (channelId) => {
         channelId: channelId
     }
 }
+export const getChannels = (state) => {
+    return state.channels ? state.channels : {}
+}
+
+
 
 export const fetchChannels = (workspaceId) => {
     return async(dispatch) => {

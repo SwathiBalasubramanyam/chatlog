@@ -1,11 +1,10 @@
 import React from 'react';
 import { closeModal } from '../../store/modal';
-// import LoginForm from '../SessionForm/LoginForm';
-// import SignupForm from '../SessionForm/SignupForm';
 import { useSelector, useDispatch } from 'react-redux';
 import './Modal.css';
 import { FiX } from "react-icons/fi";
 import DemoModal from '../DemoModal';
+import WorkspaceForm from "../WorkspacesPage/WorkspaceForm";
 
 function Modal() {
     const dispatch = useDispatch();
@@ -25,8 +24,16 @@ function Modal() {
         case 'demo':
             component = <DemoModal />;
             break;
+        case 'createWorkspace':
+            component = <WorkspaceForm />;
+            break;
         default:
             return null;
+    }
+
+    const headers = {
+        "demo": "Welcome to ChatLog !!",
+        "createWorkspace": "Create a workspace"
     }
 
     return (
@@ -34,7 +41,7 @@ function Modal() {
             <div className='modal-background' onClick={handleClick}></div>
             <div className='modal-foreground'>
                 <header className='modal-header'>
-                    <h3>Welcome to ChatLog !!</h3>
+                    <h3>{headers[modal]}</h3>
                     <FiX className="close-button" onClick={handleClick}/>
                 </header>
                 <div className='modal-body' onClick={(e) => e.stopPropagation()}>

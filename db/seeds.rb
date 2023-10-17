@@ -23,12 +23,12 @@ ApplicationRecord.transaction do
   
     puts "Creating users..."
     # Create one user with an easy to remember username, email, and password:
-    User.create!(
+    user1 = User.create!(
       email: 'demo1@chatlog.com', 
       password: 'chatlog'
     )
 
-    User.create!(
+    user2 = User.create!(
       email: 'demo2@chatlog.com', 
       password: 'chatlog'
     )
@@ -40,6 +40,74 @@ ApplicationRecord.transaction do
         password: 'password'
       }) 
     end
+
+    user3 = User.find(3)
+    user4 = User.find(4)
+    user5 = User.find(5)
+
+    puts "Creating workspaces"
+    workspace1= Workspace.create!({
+      owner_id: user1.id,
+      name: "AAO-July-2023",
+      url: "aao-july-2023/chatlog.com",
+      icon: "AA"
+    })
+
+    Channel.create!(owner_id: user1.id, workspace_id: workspace1.id, 
+    name: :general, 
+    description: "This channel is for team-wide communication and announcements. All team members are in this channel.")
+
+    Channel.create!(owner_id: user1.id, workspace_id: workspace1.id, 
+    name: :random, 
+    description: "This channel is for... well, everything else. It's a place for team jokes, spur-of-the-moment ideas, and funny GIFs. Go wild!")
+
+    workspace2 = Workspace.create!({
+      owner_id: user2.id,
+      name: "AAO-hogwarts-club",
+      url: "aao-hogwarts-club/chatlog.com",
+      icon: "AH"
+    })
+
+    Channel.create!(owner_id: user2.id, workspace_id: workspace2.id, 
+    name: :general, 
+    description: "This channel is for team-wide communication and announcements. All team members are in this channel.")
+
+    Channel.create!(owner_id: user2.id, workspace_id: workspace2.id, 
+    name: :random, 
+    description: "This channel is for... well, everything else. It's a place for team jokes, spur-of-the-moment ideas, and funny GIFs. Go wild!")
+
+    puts "Creating workspace_members"
+    WorkspaceMember.create!({
+      member_id: user1.id,
+      workspace_id: workspace1.id,
+      title: "Lead Instructor"
+    })
+    WorkspaceMember.create!({
+      member_id: user3.id,
+      workspace_id: workspace1.id,
+      title: "Student"
+    })
+    
+    WorkspaceMember.create!({
+      member_id: user4.id,
+      workspace_id: workspace1.id,
+      title: "Student"
+    })
+
+    WorkspaceMember.create!({
+      member_id: user2.id,
+      workspace_id: workspace2.id,
+    })
+
+    WorkspaceMember.create!({
+      member_id: user4.id,
+      workspace_id: workspace2.id 
+    })
+
+    WorkspaceMember.create!({
+      member_id: user5.id,
+      workspace_id: workspace2.id
+    })
   
     puts "Done!"
   end

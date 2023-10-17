@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 
 const HomePage = () => {
-    
     const sessionUser = useSelector(state => state.session.currentUser)
     if(sessionUser){
         return <Redirect to="/signin/workspaces"/>

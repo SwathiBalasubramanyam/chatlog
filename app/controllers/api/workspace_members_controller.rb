@@ -39,6 +39,11 @@ class Api::WorkspaceMembersController < ApplicationController
     render "api/workspace_members/index"
   end
 
+  def show
+    @workspace_member = WorkspaceMember.find(params[:id])
+    render "api/workspace_members/create"
+  end
+
   private
   def workspace_member_params
     params.require("workspace_member").permit(:workspace_id, :title, :status, :role)

@@ -1,0 +1,59 @@
+.workspaces-logo-link {
+    margin: 2% 30% 1% 30%;
+    display: flex;
+    justify-content: center;
+}
+
+.workspaces-index-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.workspaces-index-header > * {
+    margin: 0.25%;
+}
+
+.workspaces-index-header div:first-child {
+    display: flex;
+}
+
+.workspaces-index-header div:first-child h4:first-child {
+    color:#541554;
+}
+
+.workspaces-index-subheader {
+    color: #454245;
+}
+
+.create-workspace-icon {
+    width: 50px;
+    height: 50px
+}
+
+.workspaces-list {
+    margin: 2% 30%;
+    border: 2px solid rgb(233, 231, 231);
+    border-radius: 6px;
+}
+
+.workspaces-create-form {
+    margin: 2% 30%
+}
+
+.workspaces-create-form {
+    background-color: #f4ede480;
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 1% 2%
+}
+
+.workspace-create-btn {
+    font-size: 12px;
+    padding: 1%;
+    background-color: white;
+    border: 1px solid rgb(213, 211, 211);
+    border-radius: 5px;
+}

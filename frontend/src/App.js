@@ -20,7 +20,7 @@ const App = () => {
 
   return (
     <>
-      {sessionUser && <button onClick={handleLogout}>Click here to logout from chatlog</button>}
+      {/* {sessionUser && <button onClick={handleLogout}>Click here to logout from chatlog</button>} */}
       <Modal></Modal>
       <Switch>
         <Route path="/workspace/:workspaceId">

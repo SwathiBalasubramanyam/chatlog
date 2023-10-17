@@ -1,0 +1,41 @@
+.workspace-toolbar {
+    display: flex;
+    background-color: #541554;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    font-size: 12px;
+}
+
+.workspace-toolbar > * {
+    margin: .25%;
+}
+
+.workspace-nav-left-container {
+    display: flex;
+    width: 20%;
+    justify-content: flex-end;
+}
+
+.workspace-nav-middle-container {
+    display: flex;
+    width: 50%;
+    justify-content: flex-start;
+}
+
+.workspace-nav-right-container {
+    width: 20%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.workspace-nav-right-container > * {
+    margin: 1%;
+}
+
+.workspace-nav-search-form input {
+    margin: 0px 10px;
+    height: 25px;
+    border-radius: 6px;
+    border-style: none;
+}

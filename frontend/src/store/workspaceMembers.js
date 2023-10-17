@@ -17,6 +17,10 @@ export const receiveWorkspaceMember = (workspaceMember) => {
     }
 }
 
+export const getWorkspaceMems = (state) => {
+    return state.workspaceMembers ? state.workspaceMembers : {}
+}
+
 export const createWorkspaceMember = (workspaceMember) => {
     return async(dispatch) => {
         const res = await csrfFetch(`/api/workspaces/${workspaceMember.workspaceId}/workspace_members`, {

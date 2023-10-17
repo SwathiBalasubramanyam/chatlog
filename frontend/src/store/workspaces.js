@@ -18,7 +18,6 @@ export const receiveWorkspace = (workspace) => {
     }
 }
 
-// selectors to avoid re-renders ??
 export const getWorkspaces = (state) => {
     return state.workspaces ? state.workspaces : {};
 }
