@@ -21,7 +21,7 @@ const ContentSideBar = () => {
         channel.isChannel ? actualChannels.push(channel) : directMessages.push(channel)
     });
 
-    if (!sessionChannel){
+    if (!sessionChannel && channels.length){
         dispatch(sessionActions.setCurrentChannel(actualChannels[0]))
         dispatch(messageActions.fetchMessages(actualChannels[0].id))
     }

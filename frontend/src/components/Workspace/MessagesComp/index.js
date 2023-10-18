@@ -22,19 +22,22 @@ const MessagesComp = () => {
 
     const [messageText, setMessageText] = useState("")
 
+    useEffect(() => {
+        let sub;
+        if(sessionChannel) {
+            const sub = consumer.subscriptions.create(
+                { channel: 'MessageChannel', channel_id: sessionChannel.id},
+                { received: broadcast => {
+                    dispatch(messageActions.receiveMessage(broadcast))
+                }});
+        }
+        return () => sub?.unsubscribe();
+    }, [])
+
     if(!sessionChannel || !Object.keys(workspaceMembers).length){
         return null
     }
-
-    useEffect(() => {
-        const sub = consumer.subscriptions.create(
-            { channel: 'MessageChannel', channel_id: sessionChannel.id},
-            { received: broadcast => {
-                dispatch(messageActions.receiveMessage(broadcast))
-            }});
-        return () => sub.unsubscribe();
-    }, [sessionChannel])
-
+    
     const isOwner = sessionUser.id === sessionChannel.ownerId;
     let channelName = sessionChannel.name
     if(!sessionChannel.isChannel) {
