@@ -4,7 +4,7 @@ import sessionReducer from './session';
 import workspaceReducer from './workspaces';
 import workspaceMemberReducers from './workspaceMembers';
 import channelReducers from './channels';
-import channelMemberReducers from './channelMembers';
+import messagesReducer from './messages';
 import ui from './ui';
 
 const rootReducer = combineReducers({
@@ -12,7 +12,7 @@ const rootReducer = combineReducers({
     workspaces: workspaceReducer,
     channels: channelReducers,
     workspaceMembers: workspaceMemberReducers,
-    channelMembers: channelMemberReducers,
+    messages: messagesReducer,
     ui: ui
 })
 

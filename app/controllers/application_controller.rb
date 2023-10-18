@@ -43,6 +43,13 @@ class ApplicationController < ActionController::API
         end
     end
 
+    def require_channel_member
+        @channel = Channel.find(params[:channel_id])
+        if !@channel.member_ids.include?(@current_user.id) 
+            render json: {errors: ["You dont have permission on this channel"]}, status: 401
+        end
+    end
+
     private
     def snake_case_params
         params.deep_transform_keys!(&:underscore)

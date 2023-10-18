@@ -2,19 +2,25 @@ import { useDispatch, useSelector } from "react-redux";
 import { getWorkspaceMems } from "../../../store/workspaceMembers";
 import {IoSendSharp} from "react-icons/io5";
 import {AiOutlineEdit} from "react-icons/ai";
-import {BsPersonAdd} from "react-icons/bs";
+import {BiSolidUserRectangle} from "react-icons/bi";
+import * as messageActions from "../../../store/messages";
 import * as modalActions from "../../../store/modal";
 import * as channelActions from "../../../store/channels";
 import {RiDeleteBinLine} from "react-icons/ri";
+import { getChannelMessages } from "../../../store/messages";
+import { useState } from "react";
 
 const MessagesComp = () => {
     const dispatch = useDispatch();
     const sessionWorkspace = useSelector(state => state.session.currentWorkspace);
     const sessionUser = useSelector(state => state.session.currentUser);
     const sessionChannel = useSelector(state => state.session.currentChannel);
+    const messages = Object.values(useSelector(getChannelMessages)) || [];
     const workspaceMembers = useSelector(getWorkspaceMems);
 
-    if(!sessionChannel){
+    const [messageText, setMessageText] = useState("")
+
+    if(!sessionChannel || !Object.keys(workspaceMembers).length){
         return null
     }
 
@@ -30,8 +36,15 @@ const MessagesComp = () => {
         dispatch(channelActions.deleteChannel(sessionWorkspace.id, sessionChannel.id))
     }
 
-    const handleLeaveChannel = () => {
-
+    const handleCreateMessage = (e) => {
+        e.preventDefault();
+        let messageObj = {
+            text: messageText,
+            ownerId: sessionUser.id,
+            channelId: sessionChannel.id
+        }
+        dispatch(messageActions.createMessage(messageObj.channelId, messageObj))
+        setMessageText("")
     }
 
     return (
@@ -39,23 +52,33 @@ const MessagesComp = () => {
             <div className="messages-header">
                 <div><strong>{channelName}</strong></div>
                 <div>{sessionChannel.description || ""}</div>
-                {isOwner && sessionChannel.isChannel &&
+                {isOwner && sessionChannel.isChannel && !sessionChannel.isDefault &&
                     <AiOutlineEdit onClick={(e) => dispatch(modalActions.openModal("updateChannel"))}/>
                 }
                 {isOwner && sessionChannel.isChannel && !sessionChannel.isDefault &&
                     <RiDeleteBinLine onClick={handleDelete}></RiDeleteBinLine>
                 }
-                {sessionChannel.isChannel && <div onClick={handleLeaveChannel}>Leave Channel</div>}
-
             </div>
             <div className="messages-container">
+                {messages.map(message => {
+                    let author = workspaceMembers[message.ownerId]
+                    return (
+                        <div className="message-item">
+                            <div className="message-header">
+                                {author.fullName || author.email}
+                            </div>
+                            <div className="message-content">
+                                {message.text}
+                            </div>
+                        </div>
+                    )
+                })}
 
             </div>
             <div>
-                <form>
-                    <input type="textarea">
-                    </input>
-                    <IoSendSharp></IoSendSharp>
+                <form onSubmit={handleCreateMessage}>
+                    <input type="textarea" value={messageText} onChange={(e) => setMessageText(e.target.value)}></input>
+                    <IoSendSharp onClick={handleCreateMessage}/>
                 </form>
             </div>
         </div>

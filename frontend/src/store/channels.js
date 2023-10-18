@@ -1,6 +1,7 @@
 import csrfFetch from "./csrf";
 import { RECEIVE_WORKSPACE } from "./workspaces";
 import * as sessionActions from "./session";
+import * as messageActions from "./messages";
 
 export const RECEIVE_CHANNELS = "channels/RECEIVE_CHANNELS";
 export const RECEIVE_CHANNEL = "channels/RECEIVE_CHANNEL";
@@ -57,6 +58,7 @@ export const createChannel = (workspaceId, channel) => {
         const data = await res.json();
         dispatch(receiveChannel(data));
         dispatch(sessionActions.setCurrentChannel(data.channel))
+        dispatch(messageActions.fetchMessages(data.channel.id));
         return data;
     }
 }

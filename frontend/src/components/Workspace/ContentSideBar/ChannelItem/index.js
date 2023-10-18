@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "./ChannelItem.css";
 import { getWorkspaceMems } from "../../../../store/workspaceMembers";
 import { setCurrentChannel } from "../../../../store/session";
+import * as messageActions from "../../../../store/messages";
 
 const ChannelItem = ({channel}) => {
     const dispatch = useDispatch();
@@ -17,6 +18,7 @@ const ChannelItem = ({channel}) => {
 
     const handleClick = () => {
         dispatch(setCurrentChannel(channel));
+        dispatch(messageActions.fetchMessages(channel.id))
     }
 
     return (

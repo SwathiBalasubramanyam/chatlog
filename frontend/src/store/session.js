@@ -1,4 +1,4 @@
-import csrfFetch from "./csrf"
+import csrfFetch from "./csrf";
 
 export const SET_CURRENT_USER = "sessions/SET_CURRENT_USER"
 export const SET_CURRENT_WORKSPACE = "sessions/SET_CURRENT_WORKSPACE"

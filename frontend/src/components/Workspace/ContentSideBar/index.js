@@ -2,10 +2,12 @@ import ChannelItem from "./ChannelItem";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { getChannels } from "../../../store/channels";
 import "./ContentSideBar.css";
+import * as messageActions from "../../../store/messages";
 import {AiOutlinePlus, AiOutlineEdit} from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import * as sessionActions from "../../../store/session";
 import * as modalActions from "../../../store/modal";
+import consumer from "../../../consumer";
 
 const ContentSideBar = () => {
     const dispatch = useDispatch();
@@ -21,6 +23,14 @@ const ContentSideBar = () => {
 
     if (!sessionChannel){
         dispatch(sessionActions.setCurrentChannel(actualChannels[0]))
+        dispatch(messageActions.fetchMessages(actualChannels[0].id))
+        const sub = consumer.subscriptions.create(
+            { channel: 'MessageChannel', channel_id: actualChannels[0].id},
+            { received: broadcast => {
+                console.log("message received")
+                console.log(broadcast);
+                console.log(broadcast.body)
+            }});
     }
 
     const handleCreateChannel = () => {

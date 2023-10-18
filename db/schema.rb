@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_18_020318) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_18_171651) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -35,6 +35,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_18_020318) do
     t.datetime "updated_at", null: false
     t.index ["owner_id"], name: "index_channels_on_owner_id"
     t.index ["workspace_id", "name"], name: "index_channels_on_workspace_id_and_name", unique: true
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.text "text", null: false
+    t.bigint "owner_id", null: false
+    t.bigint "channel_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["channel_id"], name: "index_messages_on_channel_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -78,6 +87,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_18_020318) do
   add_foreign_key "channel_members", "users", column: "member_id"
   add_foreign_key "channels", "users", column: "owner_id"
   add_foreign_key "channels", "workspaces"
+  add_foreign_key "messages", "channels"
+  add_foreign_key "messages", "users", column: "owner_id"
   add_foreign_key "workspace_members", "users", column: "member_id"
   add_foreign_key "workspaces", "users", column: "owner_id"
 end
