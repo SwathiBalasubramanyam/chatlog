@@ -9,6 +9,8 @@ import * as channelActions from "../../../store/channels";
 import {RiDeleteBinLine} from "react-icons/ri";
 import { getChannelMessages } from "../../../store/messages";
 import { useState } from "react";
+import consumer from "../../../consumer";
+import { useEffect } from "react";
 
 const MessagesComp = () => {
     const dispatch = useDispatch();
@@ -24,8 +26,16 @@ const MessagesComp = () => {
         return null
     }
 
-    const isOwner = sessionUser.id === sessionChannel.ownerId;
+    useEffect(() => {
+        const sub = consumer.subscriptions.create(
+            { channel: 'MessageChannel', channel_id: sessionChannel.id},
+            { received: broadcast => {
+                dispatch(messageActions.receiveMessage(broadcast))
+            }});
+        return () => sub.unsubscribe();
+    }, [sessionChannel])
 
+    const isOwner = sessionUser.id === sessionChannel.ownerId;
     let channelName = sessionChannel.name
     if(!sessionChannel.isChannel) {
         channelName = sessionChannel.memberIds.map(memId => workspaceMembers[memId]["fullName"] || workspaceMembers[memId]["email"])
