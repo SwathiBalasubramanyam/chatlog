@@ -5,6 +5,7 @@ import './Modal.css';
 import { FiX } from "react-icons/fi";
 import DemoModal from '../DemoModal';
 import WorkspaceForm from "../WorkspacesPage/WorkspaceForm";
+import UpdateUserForm from '../UserForm/UserUpdateForm';
 
 function Modal() {
     const dispatch = useDispatch();
@@ -27,13 +28,21 @@ function Modal() {
         case 'createWorkspace':
             component = <WorkspaceForm />;
             break;
+        case 'editWorkspace':
+            component = <WorkspaceForm edit={true}/>;
+            break;
+        case 'updateUser':
+            component = <UpdateUserForm/>;
+            break;
         default:
             return null;
     }
 
     const headers = {
         "demo": "Welcome to ChatLog !!",
-        "createWorkspace": "Create a workspace"
+        "createWorkspace": "Create a workspace",
+        "editWorkspace": "Edit your workspace",
+        "updateUser": "Update Profile"
     }
 
     return (

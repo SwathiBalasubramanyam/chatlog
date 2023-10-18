@@ -7,7 +7,7 @@ const Section = ({sectionName, srcPath, sectionHeaders, sectionBody, background,
                     <video src={srcPath} autoPlay loop muted ></video>
                 </div>}
                 <div className="section-copy">
-                    {sectionHeaders.map(secHeader => <h2 className="section-header">{secHeader}</h2>)}
+                    {sectionHeaders.map((secHeader, idx) => <h2 key={idx} className="section-header">{secHeader}</h2>)}
                     <p className="section-body">{sectionBody}</p>
                 </div>
                 {!videoFirst && <div className="section-illustration">

@@ -15,5 +15,10 @@ class Workspace < ApplicationRecord
     has_many :members,
         through: :workspace_members,
         source: :member
+
+    has_many :channels,
+        class_name: :Channel,
+        foreign_key: :workspace_id,
+        primary_key: :id
     
 end

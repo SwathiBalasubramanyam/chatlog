@@ -13,11 +13,18 @@ class Api::WorkspacesController < ApplicationController
     @workspace.owner_id = @current_user.id
     if @workspace.save
       WorkspaceMember.create!(member_id: @current_user.id, workspace_id: @workspace.id, role: "admin")
-      Channel.create!(owner_id: @current_user.id, workspace_id: @workspace.id, 
+      wchannel1 = Channel.create!(owner_id: @current_user.id, workspace_id: @workspace.id, 
         name: :general, description: "This channel is for team-wide communication and announcements. All team members are in this channel.")
 
-      Channel.create!(owner_id: @current_user.id, workspace_id: @workspace.id, 
+      wchannel2 = Channel.create!(owner_id: @current_user.id, workspace_id: @workspace.id, 
       name: :random, description: "This channel is for... well, everything else. It's a place for team jokes, spur-of-the-moment ideas, and funny GIFs. Go wild!")
+
+      wchannel3 = Channel.create!(owner_id: @current_user.id, workspace_id: @workspace.id,
+        name: @current_user.id.to_s)
+
+      ChannelMember.create!(member_id: @current_user.id, channel_id: wchannel1.id, active: true)
+      ChannelMember.create!(member_id: @current_user.id, channel_id: wchannel2.id, active: true)
+      ChannelMember.create!(member_id: @current_user.id, channel_id: wchannel3.id, active: true)
 
       render "api/workspaces/create"
     else
@@ -31,12 +38,13 @@ class Api::WorkspacesController < ApplicationController
   end
 
   def update
-    @workspace = Workspace.find(params[:id], owner_id: @current_user.id)
+    @workspace = Workspace.where(id: params[:id], owner_id: @current_user.id)
     if !@workspace
       render json: {errors: ["Only admins can edit a workspace"]}, status: 404
     end
 
-    if @workspace.update(workspace_params)  
+    if @workspace.update(workspace_params)
+      @workspace = Workspace.find(params[:id]) 
       render "api/workspaces/create"
     else
       render json: {errors: @workspace.errors.full_messages}, status: :unprocessable_entity

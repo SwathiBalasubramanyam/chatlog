@@ -1,0 +1,71 @@
+.workspace-page-sidebar-profile-comp {
+    display: flex;
+    align-items: center;
+}
+
+.workspace-sidebar-profile-img {
+    width: 30px;
+    height: 30px;
+    border: 2px solid white;
+    padding: 1% 1% 1.5% 1%;
+    background-color: #c28dc2;
+    border-radius: 6px;
+}
+
+.workspace-sidebar-profile-content {
+    margin: 2%;
+    padding: 2%;
+    border-radius: 10px;
+    border: 2px solid white;
+    color: black;
+    background-color: white;
+    width: 300px;
+    height: 200px;
+}
+
+.workspace-sidebar-profile-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.workspace-sidebar-profile-details li {
+    padding: 2%;
+    border-bottom: 1px solid rgb(220, 213, 213);
+}
+
+.workspace-sidebar-profile-details li > * {
+    padding: 1.5%;
+}
+
+.user-profile-details {
+    display: flex;
+}
+
+.user-other-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.workspace-sidebar-status-update {
+    display: flex;
+    align-items: center;
+}
+
+.workspace-sidebar-profile-update {
+    display: flex;
+    align-items: center;
+}
+
+.workspace-sidebar-profile-update div:first-child {
+    border: 2px solid white;
+    padding-right: 4%;
+}
+
+.workspace-sidebar-profile-logout {
+    display: flex;
+    align-items: center;
+}
+
+.workspace-sidebar-profile-img:hover + .hidden {
+    display: block;
+}

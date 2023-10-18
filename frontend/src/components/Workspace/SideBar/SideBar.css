@@ -1,1 +1,8 @@
-
+.workspace-page-sidebar {
+    padding: 1% 1%;
+    width: 20%;
+    height: 100vh;
+    font-size: 14px;
+    background-color:#863e86;
+    color: white;
+}

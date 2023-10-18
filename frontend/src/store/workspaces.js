@@ -14,12 +14,21 @@ export const receiveWorkspaces = (workspaces) => {
 export const receiveWorkspace = (workspace) => {
     return {
         type: RECEIVE_WORKSPACE,
-        workspace: workspace
+        payload: workspace
     }
 }
 
 export const getWorkspaces = (state) => {
     return state.workspaces ? state.workspaces : {};
+}
+
+export const fetchWorkspace = (workspaceId) => {
+    return async(dispatch) => {
+        const res = await csrfFetch(`/api/workspaces/${workspaceId}`);
+        const data = await res.json();
+        dispatch(receiveWorkspace(data));
+        return data;
+    }
 }
 
 export const fetchWorkspaces = () => {
@@ -38,7 +47,7 @@ export const createWorkspace = (workspace) => {
             body: JSON.stringify(workspace)
         })
         const data = await res.json();
-        dispatch(receiveWorkspace(data.workspace));
+        dispatch(receiveWorkspace(data));
         dispatch(sessionActions.setCurrentworkspace(data.workspace));
         return data;
     }
@@ -51,7 +60,7 @@ export const updateWorkspace = (workspace) => {
             body: JSON.stringify(workspace)
         })
         const data = await res.json();
-        dispatch(receiveWorkspace(data.workspace));
+        dispatch(receiveWorkspace(data));
         dispatch(sessionActions.setCurrentworkspace(data.workspace));
         return data
     }
@@ -64,7 +73,7 @@ const workspaceReducer = (state = {}, action) => {
             nextState = action.workspaces
             return nextState;
         case RECEIVE_WORKSPACE:
-            nextState[action.workspace.id] = action.workspace
+            nextState[action.payload.workspace.id] = action.payload.workspace
             return nextState;
         default:
             return state;

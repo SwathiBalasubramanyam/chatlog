@@ -1,19 +1,24 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as workspaceActions from "../../../store/workspaces";
 import "./WorkspaceForm.css";
 import * as modalActions from "../../../store/modal";
 
-const WorkspaceForm = () => {
+const WorkspaceForm = ({edit=false}) => {
     const dispatch = useDispatch();
-    const [name, setName] = useState("");
-    const [url, setUrl] = useState("");
-    const [icon, setIcon] = useState("");
+    const sessionWorkspace = useSelector((state) => state.session.currentWorkspace);
+    const [name, setName] = useState(edit ? sessionWorkspace.name : "");
+    const [url, setUrl] = useState(edit? sessionWorkspace.url : "");
+    const [icon, setIcon] = useState(edit? sessionWorkspace.icon : "");
 
     const handleCreate = (e) => {
         e.preventDefault();
         dispatch(modalActions.closeModal());
-        dispatch(workspaceActions.createWorkspace({name: name, url: url, icon: icon}));
+        if (edit) {
+            dispatch(workspaceActions.updateWorkspace({...sessionWorkspace, name: name, url: url, icon: icon}));
+        } else {
+            dispatch(workspaceActions.createWorkspace({name: name, url: url || `${name}/chatlog.com`, icon: icon || `${name.slice(0,2).toUpperCase()}`}));
+        }
     }
 
     return (
@@ -26,16 +31,16 @@ const WorkspaceForm = () => {
             <div><strong>Workspace Url</strong></div>
             <div>This will be your workspace url, set by default to workspacename/chatlog.com.</div>
             <input type="text" onChange={(e) => setUrl(e.target.value)} 
-                value={url || name ? `${name}/chatlog.com`: ""} placeholder="Workspace Url">
+                value={url} placeholder="Workspace Url">
             </input>
 
             <div><strong>Workspace Icon</strong></div>
             <div>This will be your workspace icon, set by default to first two letters of the workspace.</div>
             <input type="text" onChange={(e) => setIcon(e.target.value)} 
-                value={icon || `${name.slice(0,2).toUpperCase()}`} placeholder="Workspace Icon">
+                value={icon} placeholder="Workspace Icon">
             </input>
 
-            <button className="create-workspace-btn" onClick={handleCreate}>Create Workspace</button>
+            <button className="create-workspace-btn" onClick={handleCreate}>{edit ? "Edit Workspace" : "Create Workspace"}</button>
         </form>
     )
 }

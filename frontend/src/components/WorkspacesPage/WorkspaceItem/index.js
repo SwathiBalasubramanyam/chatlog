@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import * as sessionActions from "../../../store/session";
 import * as workspaceMemberActions from "../../../store/workspaceMembers";
-import * as channelActions from "../../../store/channels";
 import "./WorkspaceItem.css";
+
 
 const WorkspaceItem = ({workspace}) => {
     const sessionUser = useSelector((state) => state.session.currentUser)
@@ -13,13 +13,10 @@ const WorkspaceItem = ({workspace}) => {
         e.preventDefault()
         if(member){
             dispatch(sessionActions.setCurrentworkspace(workspace))
-            dispatch(workspaceMemberActions.fetchWorkspaceMembers(workspace.id))
-            dispatch(channelActions.fetchChannels(workspace.id))
+
         } else {
             dispatch(workspaceMemberActions.createWorkspaceMember({workspaceId: workspace.id}))
             dispatch(sessionActions.setCurrentworkspace(workspace))
-            dispatch(workspaceMemberActions.fetchWorkspaceMembers(workspace.id))
-            dispatch(channelActions.fetchChannels(workspace.id))
         }
     }
 

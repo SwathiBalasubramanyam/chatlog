@@ -13,17 +13,25 @@ class User < ApplicationRecord
     has_many :owned_workspaces,
         class_name: :Workspace,
         primary_key: :id,
-        foreign_key: :owner_id
+        foreign_key: :owner_id,
+        dependent: :destroy
 
     has_many :member_workspaces,
         class_name: :WorkspaceMember,
         primary_key: :id,
-        foreign_key: :member_id
+        foreign_key: :member_id,
+        dependent: :destroy
 
     has_many :workspaces,
         through: :member_workspaces,
-        source: :workspace
+        source: :workspace,
+        dependent: :destroy
 
+    has_many :channels,
+        class_name: :Channel,
+        primary_key: :id,
+        foreign_key: :owner_id,
+        dependent: :destroy
 
     def self.find_by_credentials(email, password)
         user = User.find_by(email: email)
@@ -37,7 +45,6 @@ class User < ApplicationRecord
     end
 
     private
-
     def generate_unique_session_token
         while true
             session_token = SecureRandom.urlsafe_base64
@@ -48,6 +55,4 @@ class User < ApplicationRecord
     def ensure_session_token
         self.session_token ||= generate_unique_session_token
     end
-
-
 end

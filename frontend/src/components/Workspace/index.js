@@ -1,12 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import {Redirect, useParams } from "react-router-dom/cjs/react-router-dom.min"
-import { setCurrentworkspace } from "../../store/session";
 import { useEffect } from "react";
-import { fetchWorkspaceMembers, getWorkspaceMems } from "../../store/workspaceMembers";
-import { fetchChannels, getChannels } from "../../store/channels";
+import { fetchWorkspace } from "../../store/workspaces";
 import ToolBar from "./ToolBar";
 import SideBar from "./SideBar";
 import ContentSideBar from "./ContentSideBar";
+import "./Workspace.css";
 
 const Workspace = () => {
     const dispatch = useDispatch();
@@ -14,19 +13,9 @@ const Workspace = () => {
     const sessionUser = useSelector((state) => state.session.currentUser);
     const sessionWorkspace = useSelector((state) => state.session.currentWorkspace);
 
-    let workspaceMembers = useSelector(getWorkspaceMems);
-    const channels = Object.values(useSelector(getChannels))
-
-    const workspaceMem = workspaceMembers[sessionUser.id];
-        
-    const signoutFromWorkspace = () => {
-        dispatch(setCurrentworkspace());
-    }
-    
     useEffect(() => {
-        dispatch(fetchWorkspaceMembers(workspaceId))
-        dispatch(fetchChannels(workspaceId))
-    }, [workspaceId])
+        dispatch(fetchWorkspace(workspaceId))
+    }, [dispatch, workspaceId])
     
     if (!sessionUser){
         return <Redirect to="/"></Redirect>
@@ -37,24 +26,18 @@ const Workspace = () => {
     }
     
     if(sessionWorkspace.id != workspaceId){
-        return <Redirect to={`/workspace/${workspaceId}`}/>
+        return <Redirect to={`/workspace/${sessionWorkspace.id}`}/>
     }
 
     return (
-        <>
+        <div className="workspace-page">
             <ToolBar/>
-            <SideBar 
-                user={sessionUser} 
-                workspace={sessionWorkspace} 
-                workspaceMem= {workspaceMem}/>
-
-            <ContentSideBar 
-                user={sessionUser}
-                workspace={sessionWorkspace}
-                channels={channels}/>
-
-            <button onClick={signoutFromWorkspace}>SignOutworkspace</button>
-        </>
+            <div className="workspace-main-page-content">
+                <SideBar/>
+                <ContentSideBar/>
+                <div className="messages-section"></div>
+            </div>
+        </div>
     )
 }
 export default Workspace;

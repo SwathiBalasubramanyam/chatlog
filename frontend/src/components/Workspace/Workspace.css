@@ -1,0 +1,9 @@
+.workspace-main-page-content {
+    display: flex
+}
+
+.workspace-main-page-content svg {
+    width: 30px;
+    height: 30px;
+}
+

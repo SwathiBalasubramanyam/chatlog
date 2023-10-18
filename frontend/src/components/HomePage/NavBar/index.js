@@ -35,7 +35,7 @@ const TechnologiesUsed = () => {
 const PersonalLinks = ({personalLinks}) => {
     return (
         <div className="personal-links">
-            {Object.entries(personalLinks).map(link => <a href={link[1]} target="_blank">{link[0]}</a>)}
+            {Object.entries(personalLinks).map((link, idx) => <a key={idx} href={link[1]} target="_blank">{link[0]}</a>)}
         </div>
     )
 }

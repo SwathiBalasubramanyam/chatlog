@@ -14,9 +14,7 @@ const App = () => {
   const sessionUser = useSelector(state => state.session.currentUser)
   const dispatch = useDispatch()
 
-  const handleLogout = ()=>{
-    dispatch(sessionActions.logout())
-  }
+
 
   return (
     <>

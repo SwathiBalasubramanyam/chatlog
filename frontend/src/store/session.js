@@ -53,6 +53,21 @@ export const signup = (email, password) => {
     }
 }
 
+export const updateUser = (userObj) => {
+    return async(dispatch) => {
+        const response = await csrfFetch(`/api/users/${userObj.id}`, {
+            method: 'PATCH',
+            body: JSON.stringify({user: userObj}),
+            headers: {
+                'Accept': 'application/json'
+            }
+        })
+        const data = await response.json()
+        dispatch(setCurrentUser(data.user));
+        return response;
+    }
+}
+
 export const logout = () => {
     return (dispatch) => {
         dispatch(setCurrentworkspace());
@@ -78,7 +93,6 @@ const sessionReducer = (state = {currentUser: JSON.parse(sessionStorage.getItem(
             nextState.currentUser = action.user;
             return nextState;
         case SET_CURRENT_WORKSPACE:
-            console.log("whats acttion.workspace", action.workspace);
             nextState.currentWorkspace = action.workspace;
             return nextState;
         default:

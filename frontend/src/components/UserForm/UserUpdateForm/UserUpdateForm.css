@@ -1,0 +1,33 @@
+.user-update-form {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    margin: 0% 0% 10% 0%;
+}
+
+.user-update-form > *{
+    margin: 2% 3%
+}
+
+.user-update-form input {
+    width: 80%;
+    border: 2px solid #863e86;
+    border-radius: 10px;
+    padding: 0% 0% 0% 5%; 
+    text-align: center;
+}
+
+.user-update-form-submit {
+    width: 50%;
+    padding: 2% 0%;
+    align-self: center;
+    background-color: #c28dc2;
+    border-style: none;
+    border-radius: 10px;
+}
+
+.user-update-form-submit:focus {
+	outline: none;
+	border: 2px solid #cab8ca;
+}
+

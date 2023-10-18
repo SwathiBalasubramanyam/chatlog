@@ -1,4 +1,5 @@
 import csrfFetch from "./csrf";
+import { RECEIVE_WORKSPACE } from "./workspaces";
 
 export const RECEIVE_WORKSPACE_MEMBERS = "workspace_members/RECEIVE_WORKSPACE_MEMBERS"
 export const RECEIVE_WORKSPACE_MEMBER = "workspace_members/RECEIVE_WORKSPACE_MEMBER"
@@ -62,6 +63,11 @@ const workspaceMemberReducers = (state = {}, action) => {
             return nextState;
         case RECEIVE_WORKSPACE_MEMBERS:
             nextState = action.workspaceMembers;
+            return nextState;
+        case RECEIVE_WORKSPACE:
+            if("workspaceMembers" in action.payload){
+                nextState = action.payload.workspaceMembers
+            }
             return nextState;
         default:
             return state;

@@ -1,0 +1,60 @@
+.workspace-page-sidebar-workspace-comp {
+    display: flex;
+    align-items: center;
+}
+
+.workspace-sidebar-wicon {
+    width: 30px;
+    height: 30px;
+    background-color: #c28dc2;
+    color: white;
+    border-radius: 6px;
+    border: 2px solid white;
+    font-weight: bold;
+    text-align: center;
+}
+
+.workspace-sidebar-wicon-content{
+    margin: 2%;
+    padding: 2%;
+    border-radius: 10px;
+    border: 2px solid white;
+    color: black;
+    background-color: white;
+    width: 300px;
+    height: 250px;
+}
+
+.workspace-sidebar-wicon-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.workspace-sidebar-wicon-details li {
+    padding: 2%;
+    border-bottom: 1px solid rgb(220, 213, 213);
+}
+
+.workspace-sidebar-wicon-details li > * {
+    padding: 1.5%;
+}
+
+.workspace-sidebar-wicon-add {
+    display: flex;
+    align-items: center;
+}
+
+.workspace-sidebar-wicon-edit {
+    display: flex;
+    align-items: center;
+}
+
+.workspace-sidebar-wicon-logout {
+    display: flex;
+    align-items: center;
+}
+
+.workspace-sidebar-wicon:hover + .hidden {
+    display: block;
+    z-index: 100;
+}
