@@ -13,14 +13,15 @@ class Api::WorkspacesController < ApplicationController
     @workspace.owner_id = @current_user.id
     if @workspace.save
       WorkspaceMember.create!(member_id: @current_user.id, workspace_id: @workspace.id, role: "admin")
+
       wchannel1 = Channel.create!(owner_id: @current_user.id, workspace_id: @workspace.id, 
-        name: :general, description: "This channel is for team-wide communication and announcements. All team members are in this channel.")
+        name: :general, description: "This channel is for team-wide communication and announcements. All team members are in this channel.", is_default: true)
 
       wchannel2 = Channel.create!(owner_id: @current_user.id, workspace_id: @workspace.id, 
-      name: :random, description: "This channel is for... well, everything else. It's a place for team jokes, spur-of-the-moment ideas, and funny GIFs. Go wild!")
+      name: :random, description: "This channel is for... well, everything else. It's a place for team jokes, spur-of-the-moment ideas, and funny GIFs. Go wild!", is_default: true)
 
       wchannel3 = Channel.create!(owner_id: @current_user.id, workspace_id: @workspace.id,
-        name: @current_user.id.to_s)
+        name: @current_user.id.to_s, is_channel: false, description: "This is your space. Draft messages, list your to-dos, or keep links and files handy. You can also talk to yourself here, but please bear in mind you’ll have to supply both sides of the conversation.", is_default: true)
 
       ChannelMember.create!(member_id: @current_user.id, channel_id: wchannel1.id, active: true)
       ChannelMember.create!(member_id: @current_user.id, channel_id: wchannel2.id, active: true)

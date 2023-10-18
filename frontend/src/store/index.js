@@ -1,10 +1,10 @@
 import {createStore, applyMiddleware, combineReducers, compose} from 'redux';
 import thunk from 'redux-thunk';
 import sessionReducer from './session';
-import modalReducers from './modal';
 import workspaceReducer from './workspaces';
 import workspaceMemberReducers from './workspaceMembers';
 import channelReducers from './channels';
+import channelMemberReducers from './channelMembers';
 import ui from './ui';
 
 const rootReducer = combineReducers({
@@ -12,6 +12,7 @@ const rootReducer = combineReducers({
     workspaces: workspaceReducer,
     channels: channelReducers,
     workspaceMembers: workspaceMemberReducers,
+    channelMembers: channelMemberReducers,
     ui: ui
 })
 

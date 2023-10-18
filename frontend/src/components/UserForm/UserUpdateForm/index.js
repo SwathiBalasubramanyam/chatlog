@@ -16,6 +16,7 @@ function UpdateUserForm() {
         setErrors([]);
         return dispatch(sessionActions.updateUser(user))
             .catch(async(res) => {
+                debugger;
                 let data;
                 try {
                     data = await res.clone().json();
@@ -26,9 +27,6 @@ function UpdateUserForm() {
                 else if (data) setErrors([data]);
                 else setErrors([res.statusText]);
             })
-            .then(() => {
-                if(errors.length === 0) dispatch(modalActions.closeModal())
-            });
     }
 
     return (
@@ -39,16 +37,16 @@ function UpdateUserForm() {
             <input type="text" value={user.email} placeholder='Email'
                 onChange={(e) => setUser({...user, email: e.target.value})} required/>
 
-            <input type="text" value={user.fullName} placeholder='Full Name'
+            <input type="text" value={user.fullName || ""} placeholder='Full Name'
                 onChange={(e) => setUser({...user, fullName: e.target.value})}/>
 
-            <input type="text" value={user.displayName} placeholder='Display Name'
+            <input type="text" value={user.displayName || ""} placeholder='Display Name'
                 onChange={(e) => setUser({...user, displayName: e.target.value})}/>
 
-            <input type="text" value={user.aboutMe} placeholder='About Me'
+            <input type="text" value={user.aboutMe || ""} placeholder='About Me'
                 onChange={(e) => setUser({...user, aboutMe: e.target.value})}/>
 
-            <input type="text" value={user.namePronunciation} placeholder='Name Pronunciation'
+            <input type="text" value={user.namePronunciation || ""} placeholder='Name Pronunciation'
                 onChange={(e) => setUser({...user, namePronunciation: e.target.value})}/>
             
             <button className="user-update-form-submit" type="submit">Update Profile</button>

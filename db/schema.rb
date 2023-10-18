@@ -30,6 +30,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_18_020318) do
     t.string "name", null: false
     t.text "description"
     t.boolean "is_channel", default: true, null: false
+    t.boolean "is_default", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["owner_id"], name: "index_channels_on_owner_id"

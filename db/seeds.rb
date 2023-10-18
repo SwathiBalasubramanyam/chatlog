@@ -67,11 +67,11 @@ ApplicationRecord.transaction do
     puts "creating channels for workspace 1"
 
     w1channel1 = Channel.create!(owner_id: user1.id, workspace_id: workspace1.id, 
-    name: :general, 
+    name: :general, is_default: true,
     description: "This channel is for team-wide communication and announcements. All team members are in this channel.")
 
     w1channel2 = Channel.create!(owner_id: user1.id, workspace_id: workspace1.id, 
-    name: :random, 
+    name: :random, is_default: true,
     description: "This channel is for... well, everything else. It's a place for team jokes, spur-of-the-moment ideas, and funny GIFs. Go wild!")
 
 
@@ -88,13 +88,16 @@ ApplicationRecord.transaction do
 
 
     puts "creating private channels for members"
-    u1w1dc = Channel.create!(owner_id: user1.id, workspace_id: workspace1.id, name: user1.id.to_s, is_channel: false)
+    u1w1dc = Channel.create!(owner_id: user1.id, workspace_id: workspace1.id, name: user1.id.to_s, is_channel: false, description: "This is your space. Draft messages, list your to-dos, or keep links and files handy. You can also talk to yourself here, but please bear in mind you’ll have to supply both sides of the conversation.", is_default: true)
+
     ChannelMember.create!(member_id: user1.id, channel_id: u1w1dc.id, active: true)
 
-    u3w1dc = Channel.create!(owner_id: user3.id, workspace_id: workspace1.id, name: user3.id.to_s, is_channel: false)
+    u3w1dc = Channel.create!(owner_id: user3.id, workspace_id: workspace1.id, name: user3.id.to_s, is_channel: false, description: "This is your space. Draft messages, list your to-dos, or keep links and files handy. You can also talk to yourself here, but please bear in mind you’ll have to supply both sides of the conversation.", is_default: true)
+
     ChannelMember.create!(member_id: user3.id, channel_id: u3w1dc.id, active: true)
 
-    u4w1dc = Channel.create!(owner_id: user4.id, workspace_id: workspace1.id, name: user4.id.to_s, is_channel: false)
+    u4w1dc = Channel.create!(owner_id: user4.id, workspace_id: workspace1.id, 
+    name: user4.id.to_s, is_channel: false, description: "This is your space. Draft messages, list your to-dos, or keep links and files handy. You can also talk to yourself here, but please bear in mind you’ll have to supply both sides of the conversation.", is_default: true)
     ChannelMember.create!(member_id: user4.id, channel_id: u4w1dc.id, active: true)
 
 
@@ -124,11 +127,11 @@ ApplicationRecord.transaction do
 
     puts "creating channels for workspace 2"
     w2channel1 = Channel.create!(owner_id: user2.id, workspace_id: workspace2.id, 
-    name: :general, 
+    name: :general, is_default: true,
     description: "This channel is for team-wide communication and announcements. All team members are in this channel.")
 
     w2channel2 = Channel.create!(owner_id: user2.id, workspace_id: workspace2.id, 
-    name: :random, 
+    name: :random, is_default: true,
     description: "This channel is for... well, everything else. It's a place for team jokes, spur-of-the-moment ideas, and funny GIFs. Go wild!")
 
     puts "creating channel_members for workspace2 channels"
@@ -143,13 +146,16 @@ ApplicationRecord.transaction do
 
 
     puts "creating private channels for members"
-    u2w2dc = Channel.create!(owner_id: user2.id, workspace_id: workspace2.id, name: user2.id.to_s, is_channel: false)
+    u2w2dc = Channel.create!(owner_id: user2.id, workspace_id: workspace2.id, name: user2.id.to_s, is_channel: false, description: "This is your space. Draft messages, list your to-dos, or keep links and files handy. You can also talk to yourself here, but please bear in mind you’ll have to supply both sides of the conversation.", is_default: true)
+    
     ChannelMember.create!(member_id: user2.id, channel_id: u2w2dc.id, active: true)
 
-    u5w2dc = Channel.create!(owner_id: user5.id, workspace_id: workspace2.id, name: user5.id.to_s, is_channel: false)
+    u5w2dc = Channel.create!(owner_id: user5.id, workspace_id: workspace2.id, name: user5.id.to_s, is_channel: false, description:"This is your space. Draft messages, list your to-dos, or keep links and files handy. You can also talk to yourself here, but please bear in mind you’ll have to supply both sides of the conversation.", is_default: true)
+
     ChannelMember.create!(member_id: user5.id, channel_id: u5w2dc.id, active: true)
 
-    u4w2dc = Channel.create!(owner_id: user4.id, workspace_id: workspace2.id, name: user4.id.to_s, is_channel: false)
+    u4w2dc = Channel.create!(owner_id: user4.id, workspace_id: workspace2.id, name: user4.id.to_s, is_channel: false, description: "This is your space. Draft messages, list your to-dos, or keep links and files handy. You can also talk to yourself here, but please bear in mind you’ll have to supply both sides of the conversation.", is_default: true)
+
     ChannelMember.create!(member_id: user4.id, channel_id: u4w2dc.id, active: true)
     puts "Done!"
   end

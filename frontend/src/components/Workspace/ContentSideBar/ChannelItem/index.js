@@ -5,6 +5,7 @@ import { setCurrentChannel } from "../../../../store/session";
 
 const ChannelItem = ({channel}) => {
     const dispatch = useDispatch();
+    const sessionWorkspace = useSelector((state) => state.session.currentWorkspace);
     const sessionChannel = useSelector((state) => state.session.currentChannel);
     const workspaceMembers = useSelector(getWorkspaceMems);
     let className = sessionChannel.id === channel.id ? "channel-item is-selected": "channel-item"

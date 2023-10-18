@@ -6,6 +6,7 @@ class CreateChannels < ActiveRecord::Migration[7.0]
       t.string :name, null: false
       t.text :description 
       t.boolean :is_channel, null: false, default: true
+      t.boolean :is_default, null: false, default: false
       t.index [:workspace_id, :name], unique: true
       t.timestamps
     end

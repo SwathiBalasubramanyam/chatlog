@@ -14,6 +14,19 @@ class Api::WorkspaceMembersController < ApplicationController
       @workspace_member[:member_id] = @current_user.id
       @workspace_member[:workspace_id] = params[:workspace_id]
       if @workspace_member.save
+        wch1 = Channel.find_by(workspace_id: params[:workspace_id], name: "general")
+        wch2 = Channel.find_by(workspace_id: params[:workspace_id], name: "random")
+
+        wch3 = Channel.create!(owner_id: @current_user.id, 
+          workspace_id: params[:workspace_id],
+          name: @current_user.id.to_s,
+          is_channel: false,
+          description: "This is your space. Draft messages, list your to-dos, or keep links and files handy. You can also talk to yourself here, but please bear in mind you’ll have to supply both sides of the conversation.", is_default: true)
+
+        ChannelMember.create!(member_id: @current_user.id, channel_id: wch1.id, active: true)
+        ChannelMember.create!(member_id: @current_user.id, channel_id: wch2.id, active: true)
+        ChannelMember.create!(member_id: @current_user.id, channel_id: wch3.id, active: true)
+
         render "api/workspace_members/create"
       else
         render json: {errors: @workspace_member.errors.full_messages}, status: :unprocessable_entity

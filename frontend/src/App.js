@@ -5,20 +5,12 @@ import SignupForm from "./components/UserForm/SignupForm";
 import HomePage from "./components/HomePage";
 import WorkspacesPage from "./components/WorkspacesPage";
 import Workspace from "./components/Workspace";
-import { useDispatch, useSelector } from "react-redux";
-import * as sessionActions from "./store/session"
 import Modal from "./components/Modal";
 import "./reset.css";
 
 const App = () => {
-  const sessionUser = useSelector(state => state.session.currentUser)
-  const dispatch = useDispatch()
-
-
-
   return (
     <>
-      {/* {sessionUser && <button onClick={handleLogout}>Click here to logout from chatlog</button>} */}
       <Modal></Modal>
       <Switch>
         <Route path="/workspace/:workspaceId">

@@ -17,13 +17,14 @@ json.workspace_members do
     end
 end
 
-channels = @workspace.channels
+channels = @workspace.channels.includes(:members)
 json.channels do 
     channels.each do |channel|
         if channel.member_ids.include?(@current_user.id)
             json.set! channel.id do
                 json.extract! channel, :id, :owner_id, :workspace_id, :name, :description, 
-                    :is_channel, :created_at, :updated_at, :member_ids
+                    :is_channel, :created_at, :updated_at, :is_default
+                json.member_ids channel.members.map{|mem| mem.id}
             end
         end
     end

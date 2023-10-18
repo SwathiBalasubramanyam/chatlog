@@ -16,7 +16,7 @@ export const receiveChannels = (channels) => {
 export const receiveChannel = (channel) => {
     return {
         type: RECEIVE_CHANNEL,
-        channel: channel
+        payload: channel
     }
 }
 
@@ -28,6 +28,15 @@ export const removeChannel = (channelId) => {
 }
 export const getChannels = (state) => {
     return state.channels ? state.channels : {}
+}
+
+export const fetchChannel = (workspaceId, channelId) => {
+    return async(dispatch) => {
+        const res = await csrfFetch(`/api/workspaces/${workspaceId}/channels/${channelId}`);
+        const data = await res.json();
+        dispatch(receiveChannel(data));
+        return data;
+    }
 }
 
 export const fetchChannels = (workspaceId) => {
@@ -46,7 +55,7 @@ export const createChannel = (workspaceId, channel) => {
             body: JSON.stringify(channel)
         })
         const data = await res.json();
-        dispatch(receiveChannel(data.channel));
+        dispatch(receiveChannel(data));
         dispatch(sessionActions.setCurrentChannel(data.channel))
         return data;
     }
@@ -59,7 +68,7 @@ export const updateChannel = (workspaceId, channel) => {
             body: JSON.stringify(channel)
         })
         const data = await res.json();
-        dispatch(receiveChannel(data.channel));
+        dispatch(receiveChannel(data));
         dispatch(sessionActions.setCurrentChannel(data.channel))
         return data;
     }
@@ -83,7 +92,7 @@ const channelReducers = (state = {}, action) => {
             nextState = action.channels;
             return nextState;
         case RECEIVE_CHANNEL:
-            nextState[action.channel.id] = action.channel;
+            nextState[action.payload.channel.id] = action.payload.channel;
             return nextState;
         case REMOVE_CHANNEL:
             delete nextState[action.channelId];

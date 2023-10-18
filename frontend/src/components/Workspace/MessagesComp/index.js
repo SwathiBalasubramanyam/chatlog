@@ -13,6 +13,11 @@ const MessagesComp = () => {
     const sessionUser = useSelector(state => state.session.currentUser);
     const sessionChannel = useSelector(state => state.session.currentChannel);
     const workspaceMembers = useSelector(getWorkspaceMems);
+
+    if(!sessionChannel){
+        return null
+    }
+
     const isOwner = sessionUser.id === sessionChannel.ownerId;
 
     let channelName = sessionChannel.name
@@ -37,7 +42,7 @@ const MessagesComp = () => {
                 {isOwner && sessionChannel.isChannel &&
                     <AiOutlineEdit onClick={(e) => dispatch(modalActions.openModal("updateChannel"))}/>
                 }
-                {isOwner && sessionChannel.isChannel && 
+                {isOwner && sessionChannel.isChannel && !sessionChannel.isDefault &&
                     <RiDeleteBinLine onClick={handleDelete}></RiDeleteBinLine>
                 }
                 {sessionChannel.isChannel && <div onClick={handleLeaveChannel}>Leave Channel</div>}
