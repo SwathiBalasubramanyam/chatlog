@@ -16,6 +16,11 @@ class Channel < ApplicationRecord
     has_many :channel_members,
         class_name: :ChannelMember,
         primary_key: :id,
-        foreign_key: :channel_id
+        foreign_key: :channel_id,
+        dependent: :destroy
+
+    has_many :members,
+        through: :channel_members,
+        source: :user
 
 end

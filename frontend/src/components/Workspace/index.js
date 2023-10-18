@@ -5,6 +5,7 @@ import { fetchWorkspace } from "../../store/workspaces";
 import ToolBar from "./ToolBar";
 import SideBar from "./SideBar";
 import ContentSideBar from "./ContentSideBar";
+import MessagesComp from "./MessagesComp";
 import "./Workspace.css";
 
 const Workspace = () => {
@@ -35,7 +36,7 @@ const Workspace = () => {
             <div className="workspace-main-page-content">
                 <SideBar/>
                 <ContentSideBar/>
-                <div className="messages-section"></div>
+                <MessagesComp/>
             </div>
         </div>
     )

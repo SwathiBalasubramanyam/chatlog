@@ -3,7 +3,7 @@ import { useSelector } from "react-redux/es/hooks/useSelector";
 import "./SideBarWorkspaceComp.css"
 import { useDispatch } from "react-redux";
 import * as modalActions from "../../../store/modal";
-import { setCurrentworkspace } from "../../../store/session";
+import { setCurrentChannel, setCurrentworkspace } from "../../../store/session";
 import {MdLogout} from "react-icons/md";
 
 const SideBarWorkspaceComp = () => {
@@ -22,6 +22,7 @@ const SideBarWorkspaceComp = () => {
     }
 
     const signoutFromWorkspace = () => {
+        dispatch(setCurrentChannel());
         dispatch(setCurrentworkspace());
     }
 

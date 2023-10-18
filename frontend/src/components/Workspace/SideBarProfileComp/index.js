@@ -13,9 +13,7 @@ const SideBarProfileComp = () => {
     const dispatch = useDispatch();
     const sessionUser = useSelector((state) => state.session.currentUser);
     const workspaceMembers = useSelector(getWorkspaceMems);
-    const workspaceMem = Object.values(workspaceMembers).filter((mem) => {
-        return mem.memberId == sessionUser.id
-    })[0] || {};
+    const workspaceMem = workspaceMembers[sessionUser.id] || {};
 
     const handleUserLogout = ()=>{
         dispatch(sessionActions.logout())

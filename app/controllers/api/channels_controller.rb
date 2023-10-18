@@ -1,9 +1,9 @@
 class Api::ChannelsController < ApplicationController
 
-  before_action :require_logged_in, :require_workspace_member, only: [:create, :update, :index]
+  before_action :require_logged_in, :require_workspace_member, only: [:create, :update, :index, :destroy]
 
   def show
-    @channel = Channel.where(id: params[:id], workspace_id: params[:workspace_id])
+    @channel = Channel.find_by(id: params[:id], workspace_id: params[:workspace_id])
     render "api/channels/show"
   end
 
@@ -20,7 +20,7 @@ class Api::ChannelsController < ApplicationController
   end
 
   def update
-    @channel = Channel.where(id: params[:id], workspace_id: params[:workspace_id], owner_id: @current_user.id)
+    @channel = Channel.find_by(id: params[:id], workspace_id: params[:workspace_id], owner_id: @current_user.id)
     if !@channel
       render json: {errors: ["Only admins can edit a channel"]}, status: 401
     end
@@ -38,7 +38,7 @@ class Api::ChannelsController < ApplicationController
   end
 
   def destroy
-    @channel = Channel.where(id: params[:id], workspace_id: params[:workspace_id], owner_id: @current_user.id)
+    @channel = Channel.find_by(id: params[:id], workspace_id: params[:workspace_id], owner_id: @current_user.id)
     if @channel.owner_id != @current_user.id
       render json: {errors: ["Only admins can delete a channel"]}, status: 401
     end

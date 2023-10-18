@@ -1,5 +1,6 @@
 import csrfFetch from "./csrf";
 import { RECEIVE_WORKSPACE } from "./workspaces";
+import * as sessionActions from "./session";
 
 export const RECEIVE_CHANNELS = "channels/RECEIVE_CHANNELS";
 export const RECEIVE_CHANNEL = "channels/RECEIVE_CHANNEL";
@@ -46,6 +47,7 @@ export const createChannel = (workspaceId, channel) => {
         })
         const data = await res.json();
         dispatch(receiveChannel(data.channel));
+        dispatch(sessionActions.setCurrentChannel(data.channel))
         return data;
     }
 }
@@ -58,6 +60,7 @@ export const updateChannel = (workspaceId, channel) => {
         })
         const data = await res.json();
         dispatch(receiveChannel(data.channel));
+        dispatch(sessionActions.setCurrentChannel(data.channel))
         return data;
     }
 }
@@ -68,6 +71,8 @@ export const deleteChannel = (workspaceId, channelId) => {
             method: "DELETE"
         })
         dispatch(removeChannel(channelId));
+        dispatch(sessionActions.setCurrentChannel())
+
     }
 }
 

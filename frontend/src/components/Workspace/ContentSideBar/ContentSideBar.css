@@ -1,0 +1,47 @@
+.content-sidebar {
+    padding: 2% 2%;
+    width: 20%;
+    height: 100vh;
+    font-size: 14px;
+    background-color:#d1b1f2f1;
+}
+
+.channels-header > svg {
+    width: 10px;
+    height: 10px;
+}
+
+.dm-header > svg {
+    width: 10px;
+    height: 10px;
+}
+
+.content-sidebar-channels-section {
+    margin-top: 5%;
+}
+
+.all-channels-container {
+    margin-top: 2%
+}
+
+.content-sidebar-dm-section {
+    margin-top: 2%
+}
+
+.all-dms-container {
+    margin-top: 2%
+}
+
+.channels-header, .dm-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.channels-header > * {
+    padding: 2%
+}
+
+.dm-header > * {
+    padding: 2%
+}

@@ -6,6 +6,7 @@ import { FiX } from "react-icons/fi";
 import DemoModal from '../DemoModal';
 import WorkspaceForm from "../WorkspacesPage/WorkspaceForm";
 import UpdateUserForm from '../UserForm/UserUpdateForm';
+import ChannelForm from '../Channel/ChannelForm';
 
 function Modal() {
     const dispatch = useDispatch();
@@ -34,6 +35,12 @@ function Modal() {
         case 'updateUser':
             component = <UpdateUserForm/>;
             break;
+        case 'createChannel':
+            component = <ChannelForm/>;
+            break;
+        case 'updateChannel':
+            component = <ChannelForm update={true}/>;
+            break;
         default:
             return null;
     }
@@ -42,7 +49,9 @@ function Modal() {
         "demo": "Welcome to ChatLog !!",
         "createWorkspace": "Create a workspace",
         "editWorkspace": "Edit your workspace",
-        "updateUser": "Update Profile"
+        "updateUser": "Update Profile",
+        "createChannel": "Create a channel",
+        "updateChannel": "Edit your channel"
     }
 
     return (

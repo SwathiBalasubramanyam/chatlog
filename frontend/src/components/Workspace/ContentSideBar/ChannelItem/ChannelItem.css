@@ -1,0 +1,14 @@
+.channel-item {
+    margin: 3% 5%;
+    padding: 2% 5%;
+    border-radius: 10px;
+}
+
+.channel-item:hover {
+    background-color: #863e86;
+    opacity: 0.5;
+}
+
+.is-selected {
+    background-color: #a25ca2;
+}

@@ -2,6 +2,7 @@ import csrfFetch from "./csrf"
 
 export const SET_CURRENT_USER = "sessions/SET_CURRENT_USER"
 export const SET_CURRENT_WORKSPACE = "sessions/SET_CURRENT_WORKSPACE"
+export const SET_CURRENT_CHANNEL = "sessions/SET_CURRENT_CHANNEL"
 
 export const setCurrentUser = (user) => {
     if (user) sessionStorage.setItem("currentUser", JSON.stringify(user));
@@ -18,6 +19,15 @@ export const setCurrentworkspace = (workspace=null) => {
     return {
         type: SET_CURRENT_WORKSPACE,
         workspace: workspace
+    }
+}
+
+export const setCurrentChannel = (channel=null) => {
+    if (channel) sessionStorage.setItem("currentChannel", JSON.stringify(channel));
+    else sessionStorage.removeItem("currentChannel");
+    return {
+        type: SET_CURRENT_CHANNEL,
+        channel: channel
     }
 }
 
@@ -70,6 +80,7 @@ export const updateUser = (userObj) => {
 
 export const logout = () => {
     return (dispatch) => {
+        dispatch(setCurrentChannel());
         dispatch(setCurrentworkspace());
         dispatch(setCurrentUser());
         csrfFetch('/api/session', {method: 'DELETE'})
@@ -84,9 +95,11 @@ export const restoreSession = () => async dispatch => {
     return response;
 };
 
-const sessionReducer = (state = {currentUser: JSON.parse(sessionStorage.getItem("currentUser")), 
-                                    currentWorkspace: JSON.parse(sessionStorage.getItem("currentWorkspace"))}, 
-                                    action) => {
+const sessionReducer = (state = 
+    {currentUser: JSON.parse(sessionStorage.getItem("currentUser")), 
+    currentWorkspace: JSON.parse(sessionStorage.getItem("currentWorkspace")),
+    currentChannel: JSON.parse(sessionStorage.getItem("currentChannel"))}, action)=> {
+
     let nextState = {...state}
     switch (action.type) {
         case SET_CURRENT_USER:
@@ -94,6 +107,9 @@ const sessionReducer = (state = {currentUser: JSON.parse(sessionStorage.getItem(
             return nextState;
         case SET_CURRENT_WORKSPACE:
             nextState.currentWorkspace = action.workspace;
+            return nextState;
+        case SET_CURRENT_CHANNEL:
+            nextState.currentChannel = action.channel;
             return nextState;
         default:
             return state;
