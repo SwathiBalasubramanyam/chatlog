@@ -3,7 +3,6 @@ import * as sessionActions from "../../../store/session";
 import * as workspaceMemberActions from "../../../store/workspaceMembers";
 import "./WorkspaceItem.css";
 
-
 const WorkspaceItem = ({workspace}) => {
     const sessionUser = useSelector((state) => state.session.currentUser)
     const member = workspace.memberIds.includes(sessionUser.id)

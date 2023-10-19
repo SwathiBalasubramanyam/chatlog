@@ -2,29 +2,25 @@ import ChannelItem from "./ChannelItem";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { getChannels } from "../../../store/channels";
 import "./ContentSideBar.css";
-import * as messageActions from "../../../store/messages";
-import {AiOutlinePlus, AiOutlineEdit} from "react-icons/ai";
+import {AiOutlinePlus} from "react-icons/ai";
 import { useDispatch } from "react-redux";
-import * as sessionActions from "../../../store/session";
 import * as modalActions from "../../../store/modal";
-
 
 const ContentSideBar = () => {
     const dispatch = useDispatch();
     const sessionWorkspace = useSelector((state) => state.session.currentWorkspace);
-    const channels = Object.values(useSelector(getChannels));
     const sessionChannel = useSelector((state) => state.session.currentChannel);
+    const channels = Object.values(useSelector(getChannels));
+
+    if(!sessionChannel){
+        return null
+    }
+
     let actualChannels = [];
     let directMessages = [];
-
     channels.forEach(channel => {
         channel.isChannel ? actualChannels.push(channel) : directMessages.push(channel)
     });
-
-    if (!sessionChannel && channels.length){
-        dispatch(sessionActions.setCurrentChannel(actualChannels[0]))
-        dispatch(messageActions.fetchMessages(actualChannels[0].id))
-    }
 
     const handleCreateChannel = () => {
         dispatch(modalActions.openModal("createChannel"));
@@ -58,7 +54,6 @@ const ContentSideBar = () => {
             </div>
         </div>
     )
-
 }
 
 export default ContentSideBar;

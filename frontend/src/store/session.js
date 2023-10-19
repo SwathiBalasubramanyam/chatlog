@@ -4,7 +4,7 @@ export const SET_CURRENT_USER = "sessions/SET_CURRENT_USER"
 export const SET_CURRENT_WORKSPACE = "sessions/SET_CURRENT_WORKSPACE"
 export const SET_CURRENT_CHANNEL = "sessions/SET_CURRENT_CHANNEL"
 
-export const setCurrentUser = (user) => {
+export const setCurrentUser = (user=null) => {
     if (user) sessionStorage.setItem("currentUser", JSON.stringify(user));
     else sessionStorage.removeItem("currentUser");
     return {

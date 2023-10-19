@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import * as modalActions from "../../../store/modal";
 import { setCurrentChannel, setCurrentworkspace } from "../../../store/session";
 import {MdLogout} from "react-icons/md";
+import { removeChannels } from "../../../store/channels";
 
 const SideBarWorkspaceComp = () => {
     const dispatch = useDispatch();
@@ -22,6 +23,7 @@ const SideBarWorkspaceComp = () => {
     }
 
     const signoutFromWorkspace = () => {
+        dispatch(removeChannels());
         dispatch(setCurrentChannel());
         dispatch(setCurrentworkspace());
     }

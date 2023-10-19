@@ -19,25 +19,26 @@ const MessagesComp = () => {
     const sessionChannel = useSelector(state => state.session.currentChannel);
     const messages = Object.values(useSelector(getChannelMessages)) || [];
     const workspaceMembers = useSelector(getWorkspaceMems);
-
     const [messageText, setMessageText] = useState("")
 
     useEffect(() => {
         let sub;
-        if(sessionChannel) {
-            const sub = consumer.subscriptions.create(
+        if(sessionChannel){
+            sub = consumer.subscriptions.create(
                 { channel: 'MessageChannel', channel_id: sessionChannel.id},
-                { received: broadcast => {
-                    dispatch(messageActions.receiveMessage(broadcast))
-                }});
+                { received: broadcast => dispatch(messageActions.receiveMessage(broadcast))});
         }
-        return () => sub?.unsubscribe();
-    }, [])
+        return () => sub?.unsubscribe()
+    }, [sessionChannel])
 
     if(!sessionChannel || !Object.keys(workspaceMembers).length){
         return null
     }
-    
+
+    if(sessionChannel && sessionChannel.workspaceId != sessionWorkspace.id){
+        return null
+    }
+
     const isOwner = sessionUser.id === sessionChannel.ownerId;
     let channelName = sessionChannel.name
     if(!sessionChannel.isChannel) {
@@ -56,8 +57,8 @@ const MessagesComp = () => {
             ownerId: sessionUser.id,
             channelId: sessionChannel.id
         }
-        dispatch(messageActions.createMessage(messageObj.channelId, messageObj))
-        setMessageText("")
+        dispatch(messageActions.createMessage(messageObj.channelId, messageObj));
+        setMessageText("");
     }
 
     return (

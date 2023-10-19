@@ -6,11 +6,19 @@ import * as messageActions from "./messages";
 export const RECEIVE_CHANNELS = "channels/RECEIVE_CHANNELS";
 export const RECEIVE_CHANNEL = "channels/RECEIVE_CHANNEL";
 export const REMOVE_CHANNEL = "channels/REMOVE_CHANNEL";
+export const REMOVE_CHANNELS = "channels/REMOVE_CHANNELS";
 
 export const receiveChannels = (channels) => {
     return {
         type: RECEIVE_CHANNELS,
         channels: channels
+    }
+}
+
+export const removeChannels = () => {
+    return {
+        type: REMOVE_CHANNELS,
+        channels: {}
     }
 }
 
@@ -104,6 +112,8 @@ const channelReducers = (state = {}, action) => {
                 nextState = action.payload.channels
             }
             return nextState;
+        case REMOVE_CHANNELS:
+            return {};
         default:
             return state;
     }

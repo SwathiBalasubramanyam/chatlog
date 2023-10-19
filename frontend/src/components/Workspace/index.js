@@ -7,6 +7,8 @@ import SideBar from "./SideBar";
 import ContentSideBar from "./ContentSideBar";
 import MessagesComp from "./MessagesComp";
 import "./Workspace.css";
+import { setCurrentChannel } from "../../store/session";
+import { fetchMessages } from "../../store/messages";
 
 const Workspace = () => {
     const dispatch = useDispatch();
@@ -15,8 +17,12 @@ const Workspace = () => {
     const sessionWorkspace = useSelector((state) => state.session.currentWorkspace);
 
     useEffect(() => {
-        dispatch(fetchWorkspace(workspaceId))
-    }, [dispatch, workspaceId])
+        dispatch(fetchWorkspace(workspaceId)).then((data) => {
+            let firstChannel = Object.values(data.channels)[0]
+            dispatch(setCurrentChannel(firstChannel))
+            dispatch(fetchMessages(firstChannel.id))
+        })
+    }, [workspaceId])
     
     if (!sessionUser){
         return <Redirect to="/"></Redirect>
