@@ -91,7 +91,7 @@ input {
 
 input:focus {
 	outline: none;
-	border: 2px solid rgb(133, 179, 195);
+	border: 2px solid rgb(157, 153, 186);
 }
 
 .errors li{

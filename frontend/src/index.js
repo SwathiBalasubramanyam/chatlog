@@ -8,6 +8,7 @@ import configureStore from "./store";
 import * as sessionActions from "./store/session";
 import * as workspaceActions from "./store/workspaces";
 import * as messageActions from "./store/messages";
+import * as channelMemberActions from "./store/channelMembers";
 import csrfFetch from "./store/csrf";
 
 const store = configureStore();
@@ -18,6 +19,7 @@ if (process.env.NODE_ENV !== "production") {
   window.sessionActions = sessionActions;
   window.workspaceActions = workspaceActions;
   window.messageActions = messageActions;
+  window.channelMemberActions = channelMemberActions;
 }
 
 function Root() {

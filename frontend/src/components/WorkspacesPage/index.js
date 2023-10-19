@@ -31,7 +31,6 @@ const WorkspacesPage = () => {
                 <div>Want to use Slack with a different team?</div>
                 <button className="workspace-create-btn" onClick={() => dispatch(modalActions.openModal("createWorkspace"))}>Create Another Workspace</button>
             </div>
-            
         </div>
     )
 }

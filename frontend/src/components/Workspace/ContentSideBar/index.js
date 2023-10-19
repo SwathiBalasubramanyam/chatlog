@@ -5,12 +5,23 @@ import "./ContentSideBar.css";
 import {AiOutlinePlus} from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import * as modalActions from "../../../store/modal";
+import { useEffect } from "react";
+import { setCurrentChannel } from "../../../store/session";
+import { fetchMessages } from "../../../store/messages";
 
 const ContentSideBar = () => {
     const dispatch = useDispatch();
     const sessionWorkspace = useSelector((state) => state.session.currentWorkspace);
     const sessionChannel = useSelector((state) => state.session.currentChannel);
     const channels = Object.values(useSelector(getChannels));
+
+    useEffect(() => {
+        if(channels.length && !sessionChannel){
+            let firstChannel = channels[0]
+            dispatch(setCurrentChannel(firstChannel))
+            dispatch(fetchMessages(firstChannel.id))
+        }
+    }, [sessionChannel, channels])
 
     if(!sessionChannel){
         return null
@@ -24,6 +35,10 @@ const ContentSideBar = () => {
 
     const handleCreateChannel = () => {
         dispatch(modalActions.openModal("createChannel"));
+    }
+
+    const handleCreateDirectMessage = () => {
+        dispatch(modalActions.openModal("createDirectMessage"));
     }
 
     return (
@@ -46,7 +61,7 @@ const ContentSideBar = () => {
             <div className="content-sidebar-dm-section">
                 <div className="dm-header">
                     <div>Direct Messages</div>
-                    <AiOutlinePlus/>
+                    <AiOutlinePlus onClick={handleCreateDirectMessage}/>
                 </div>
                 <div className="all-dms-container">
                     {directMessages.map(channel => <ChannelItem key={channel.id} channel={channel}/>)}

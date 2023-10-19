@@ -7,6 +7,7 @@ import DemoModal from '../DemoModal';
 import WorkspaceForm from "../WorkspacesPage/WorkspaceForm";
 import UpdateUserForm from '../UserForm/UserUpdateForm';
 import ChannelForm from '../Channel/ChannelForm';
+import AddMemberForm from '../AddMemberForm';
 
 function Modal() {
     const dispatch = useDispatch();
@@ -41,6 +42,12 @@ function Modal() {
         case 'updateChannel':
             component = <ChannelForm update={true}/>;
             break;
+        case 'addMembers':
+            component = <AddMemberForm/>;
+            break;
+        case 'createDirectMessage':
+            component = <AddMemberForm directMessage={true}/>;
+            break;
         default:
             return null;
     }
@@ -51,7 +58,9 @@ function Modal() {
         "editWorkspace": "Edit your workspace",
         "updateUser": "Update Profile",
         "createChannel": "Create a channel",
-        "updateChannel": "Edit your channel"
+        "updateChannel": "Edit your channel",
+        "addMembers": "Add Members to your channel",
+        "createDirectMessage": "New Message"
     }
 
     return (

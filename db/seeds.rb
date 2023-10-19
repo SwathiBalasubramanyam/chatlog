@@ -30,7 +30,7 @@ ApplicationRecord.transaction do
     user2 = User.create!(email: 'demo2@chatlog.com', password: 'chatlog')
   
     # More users
-    5.times do 
+    10.times do 
       User.create!({ email: Faker::Internet.unique.email, password: 'password'}) 
     end
 

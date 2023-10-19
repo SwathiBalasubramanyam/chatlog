@@ -12,10 +12,10 @@ const WorkspaceItem = ({workspace}) => {
         e.preventDefault()
         if(member){
             dispatch(sessionActions.setCurrentworkspace(workspace))
-
         } else {
-            dispatch(workspaceMemberActions.createWorkspaceMember({workspaceId: workspace.id}))
-            dispatch(sessionActions.setCurrentworkspace(workspace))
+            dispatch(workspaceMemberActions.createWorkspaceMember({workspaceId: workspace.id})).then(() => 
+                dispatch(sessionActions.setCurrentworkspace(workspace))
+            )
         }
     }
 

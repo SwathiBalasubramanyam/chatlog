@@ -1,14 +1,16 @@
-import { RECEIVE_CHANNEL } from "./channels"
+import csrfFetch from "./csrf";
+import * as workspaceActions from "./workspaces";
+import * as sessionActions from "./session";
 
-const channelMemberReducers = (state = {}, action) => {
-    let nextState = {...state}
-    switch (action.type) {
-        case RECEIVE_CHANNEL:
-            nextState = action.payload.channelMembers;
-            return nextState;
-        default:
-            return state;
+export const createChannelMembers = (channelId, memberIds) => {
+    return async(dispatch) => {
+        const res = await csrfFetch(`/api/channels/${channelId}/channel_members`, {
+            method: 'POST',
+            body: JSON.stringify({memberIds: memberIds})
+        })
+        const data = await res.json();
+        dispatch(workspaceActions.receiveWorkspace(data));
+        dispatch(sessionActions.setCurrentChannel(data.channels[channelId]));
+        return data;
     }
 }
-
-export default channelMemberReducers;

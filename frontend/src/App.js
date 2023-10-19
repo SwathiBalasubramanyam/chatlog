@@ -6,6 +6,7 @@ import HomePage from "./components/HomePage";
 import WorkspacesPage from "./components/WorkspacesPage";
 import Workspace from "./components/Workspace";
 import Modal from "./components/Modal";
+import AddMemberForm from "./components/AddMemberForm";
 import "./reset.css";
 
 const App = () => {
@@ -13,6 +14,9 @@ const App = () => {
     <>
       <Modal></Modal>
       <Switch>
+        <Route path="/addmembers">
+          <AddMemberForm/>
+        </Route>
         <Route path="/workspace/:workspaceId">
           <Workspace/>
         </Route>

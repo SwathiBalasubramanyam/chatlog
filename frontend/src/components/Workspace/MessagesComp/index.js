@@ -31,11 +31,19 @@ const MessagesComp = () => {
         return () => sub?.unsubscribe()
     }, [sessionChannel])
 
-    if(!sessionChannel || !Object.keys(workspaceMembers).length){
+    if(!sessionWorkspace || !sessionChannel){
         return null
     }
 
-    if(sessionChannel && sessionChannel.workspaceId != sessionWorkspace.id){
+    if(sessionChannel.workspaceId != sessionWorkspace.id){
+        return null
+    }
+
+    if(!Object.keys(workspaceMembers).length){
+        return null
+    }
+
+    if(Object.values(workspaceMembers)[0].workspaceId != sessionWorkspace.id){
         return null
     }
 
@@ -71,6 +79,9 @@ const MessagesComp = () => {
                 }
                 {isOwner && sessionChannel.isChannel && !sessionChannel.isDefault &&
                     <RiDeleteBinLine onClick={handleDelete}></RiDeleteBinLine>
+                }
+                {sessionChannel.isChannel && !sessionChannel.isDefault && 
+                    <BiSolidUserRectangle onClick={(e) => dispatch(modalActions.openModal("addMembers"))}></BiSolidUserRectangle>
                 }
             </div>
             <div className="messages-container">

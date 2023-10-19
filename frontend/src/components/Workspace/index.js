@@ -17,11 +17,7 @@ const Workspace = () => {
     const sessionWorkspace = useSelector((state) => state.session.currentWorkspace);
 
     useEffect(() => {
-        dispatch(fetchWorkspace(workspaceId)).then((data) => {
-            let firstChannel = Object.values(data.channels)[0]
-            dispatch(setCurrentChannel(firstChannel))
-            dispatch(fetchMessages(firstChannel.id))
-        })
+        dispatch(fetchWorkspace(workspaceId))
     }, [workspaceId])
     
     if (!sessionUser){
