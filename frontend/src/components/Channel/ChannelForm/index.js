@@ -66,7 +66,7 @@ function ChannelForm({update=false}) {
             <input type="text" value={channel.description} placeholder='Channel Description'
                 onChange={(e) => setChannel({...channel, description: e.target.value})}/>
 
-            <button className="channel-form" type="submit">{channelCta}</button>
+            <button className="channel-form-btn" type="submit">{channelCta}</button>
         </form>
     );
 }

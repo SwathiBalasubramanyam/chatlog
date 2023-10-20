@@ -11,6 +11,7 @@ import { getChannelMessages } from "../../../store/messages";
 import { useState } from "react";
 import consumer from "../../../consumer";
 import { useEffect } from "react";
+import "./MessagesComp.css"
 
 const MessagesComp = () => {
     const dispatch = useDispatch();
@@ -33,7 +34,7 @@ const MessagesComp = () => {
 
             setIsOwner(sessionUser.id === sessionChannel.ownerId)
 
-            let channelName = sessionChannel.name
+            let channelName = "# " + sessionChannel.name
             if(!sessionChannel.isChannel) {
                 channelName = sessionChannel.memberIds.map(memId => workspaceMembers[memId]["email"]).join(", ")
             }
@@ -60,36 +61,39 @@ const MessagesComp = () => {
     return (sessionWorkspace && sessionChannel && sessionChannel.workspaceId == sessionWorkspace.id) ? (
         <div className="messages-section">
             <div className="messages-header">
-                <div><strong>{channelName}</strong></div>
-                <div>{sessionChannel.description || ""}</div>
-                {isOwner && sessionChannel.isChannel && !sessionChannel.isDefault &&
-                    <AiOutlineEdit onClick={(e) => dispatch(modalActions.openModal("updateChannel"))}/>
-                }
-                {isOwner && sessionChannel.isChannel && !sessionChannel.isDefault &&
-                    <RiDeleteBinLine onClick={handleDelete}></RiDeleteBinLine>
-                }
-                {sessionChannel.isChannel && !sessionChannel.isDefault && 
-                    <BiSolidUserRectangle onClick={(e) => dispatch(modalActions.openModal("addMembers"))}></BiSolidUserRectangle>
-                }
+                <div className="messages-header-channel-name"><strong>{channelName}</strong>
+                    {isOwner && sessionChannel.isChannel && !sessionChannel.isDefault &&
+                        <AiOutlineEdit onClick={(e) => dispatch(modalActions.openModal("updateChannel"))}/>
+                    }
+                    {isOwner && sessionChannel.isChannel && !sessionChannel.isDefault &&
+                        <RiDeleteBinLine onClick={handleDelete}></RiDeleteBinLine>
+                    }
+                    {sessionChannel.isChannel && !sessionChannel.isDefault && 
+                        <BiSolidUserRectangle onClick={(e) => dispatch(modalActions.openModal("addMembers"))}></BiSolidUserRectangle>
+                    }
+                </div>
+                <div className="messages-header-channel-description">{sessionChannel.description || ""}</div>
+                
             </div>
             <div className="messages-container">
                 {messages.map(message => {
                     let author = workspaceMembers[message.ownerId] || {}
                     return (
-                        <div className="message-item">
+                        <div className="message-item" key={message.id}>
+                            <div className="user-icon"><BiSolidUserRectangle/></div>
                             <div className="message-header">
-                                {author.fullName || author.email}
-                            </div>
-                            <div className="message-content">
-                                {message.text}
+                                <strong>{author.email}</strong>
+                                <div className="message-content">
+                                    {message.text}
+                                </div>
                             </div>
                         </div>
                     )
                 })}
             </div>
-            <div>
-                <form onSubmit={handleCreateMessage}>
-                    <input type="textarea" value={messageText} onChange={(e) => setMessageText(e.target.value)}></input>
+            <div className="composer-page-footer">
+                <form className="composer-page-form" onSubmit={handleCreateMessage}>
+                    <input className="composer-page-input" type="textarea" value={messageText} onChange={(e) => setMessageText(e.target.value)}></input>
                     <IoSendSharp onClick={handleCreateMessage}/>
                 </form>
             </div>

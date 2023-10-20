@@ -1,12 +1,23 @@
 .channel-form {
-    margin: 2%;
+    margin: 0% 2% 10% 2%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 200px
 }
 
 .channel-form > input {
+    padding: 2px;
     margin: 5%;
     border: 2px solid rgb(163, 127, 163);
+    border-radius: 10px;
+}
+
+.channel-form-btn {
+    width: 355px;
+    height: 35px;
+    padding: 1% 2%;
+    color: white;
+    background-color: #541554;
     border-radius: 10px;
 }

@@ -3,6 +3,7 @@ import { useSelector } from "react-redux/es/hooks/useSelector";
 import { getChannels } from "../../../store/channels";
 import "./ContentSideBar.css";
 import {AiOutlinePlus} from "react-icons/ai";
+import {BiEdit} from "react-icons/bi";
 import { useDispatch } from "react-redux";
 import * as modalActions from "../../../store/modal";
 import { useEffect } from "react";
@@ -15,18 +16,15 @@ const ContentSideBar = () => {
     const sessionChannel = useSelector((state) => state.session.currentChannel);
     const channels = Object.values(useSelector(getChannels));
 
-    // useEffect(() => {
-    //     if(sessionChannel && sessionWorkspace){
-    //         dispatch(fetchMessages(sessionChannel.id))
-    //     }
-    //     if(!sessionChannel && channels.length){
-    //         let firstChannel = channels[0]
-    //         dispatch(fetchMessages(firstChannel.id)).then(() => {
-    //             dispatch(setCurrentChannel(firstChannel))
-    //         })
+    useEffect(() => {
+        if(!sessionChannel && channels.length){
+            let firstChannel = channels[0]
+            dispatch(fetchMessages(firstChannel.id)).then(() => {
+                dispatch(setCurrentChannel(firstChannel))
+            })
 
-    //     }
-    // }, [sessionChannel, channels])
+        }
+    }, [sessionChannel, channels])
 
     if(!sessionChannel){
         return null
@@ -49,27 +47,31 @@ const ContentSideBar = () => {
     return (
         <div className="content-sidebar">
             <div className="content-sidebar-header">
-                <div><strong>{sessionWorkspace.name}</strong></div>
+                <div className="content-sidebar-header-text">
+                    <strong>{sessionWorkspace.name}</strong>
+                </div>
+                <BiEdit onClick={handleCreateDirectMessage}></BiEdit>
             </div>
 
             <div className="content-sidebar-channels-section">
-                <div className="channels-header">
-                    <div>Channels</div>
-                    <AiOutlinePlus onClick={handleCreateChannel}/>
-                </div>
-
+                <div className="channels-header"> Channels </div>
                 <div className="all-channels-container">
                     {actualChannels.map(channel => <ChannelItem key={channel.id} channel={channel}/>)}
+                    <div className="add-channels" onClick={handleCreateChannel}>
+                        <AiOutlinePlus/>Add Channels
+                    </div>
                 </div>
             </div>
 
             <div className="content-sidebar-dm-section">
                 <div className="dm-header">
                     <div>Direct Messages</div>
-                    <AiOutlinePlus onClick={handleCreateDirectMessage}/>
                 </div>
                 <div className="all-dms-container">
                     {directMessages.map(channel => <ChannelItem key={channel.id} channel={channel}/>)}
+                    <div className="add-dm-channels" onClick={handleCreateDirectMessage}>
+                        <AiOutlinePlus/>Add Direct Messages
+                    </div>
                 </div>
             </div>
         </div>

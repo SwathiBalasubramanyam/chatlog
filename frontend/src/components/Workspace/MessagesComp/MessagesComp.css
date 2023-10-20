@@ -1,0 +1,80 @@
+.messages-section {
+    background-color: white;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.messages-header{
+    height: 10%;
+}
+
+.messages-container {
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    margin: 2% 2% 0% 2%;
+    overflow-y: scroll;
+}
+
+.composer-page-footer{
+    margin: 2% 2% 10% 2%;
+    height: 10%;
+    position: relative;
+    border: 2px solid rgb(220, 213, 213);
+    border-radius: 10px;
+}
+
+.composer-page-form {
+    width: 95%;
+    height: 90%;
+}
+
+.composer-page-input {
+    margin: 1% 1%;
+    border: none;
+    width: inherit;
+    height: inherit;
+}
+
+.composer-page-input:focus {
+    border: none;
+}
+
+.message-item{
+    display: flex;
+    align-items: flex-start;
+}
+
+.message-header {
+    align-items: center;
+    margin: 0.5% 1%
+}
+
+.user-icon > svg {
+    height: 30px;
+    width: 30px;
+    color: #863e86;
+}
+
+.message-content {
+    margin: 1%
+}
+
+.messages-header-channel-name{
+    padding: 1% 2% 1% 2%;
+    border-bottom: 2px solid rgb(220, 213, 213);
+}
+
+.messages-header-channel-description{
+    padding: 1% 2%;
+}
+
+.messages-header-channel-name > svg {
+    padding-left: 1%;
+    padding-right: 1%;
+    width: 20px;
+    height: 20px;
+}

@@ -1,47 +1,53 @@
 .content-sidebar {
-    padding: 2% 2%;
     width: 20%;
     height: 100vh;
-    font-size: 14px;
-    background-color:#d1b1f2f1;
+    background-color:#cfb4ddf1;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
 }
 
-.channels-header > svg {
-    width: 10px;
-    height: 10px;
-}
-
-.dm-header > svg {
-    width: 10px;
-    height: 10px;
-}
-
-.content-sidebar-channels-section {
-    margin-top: 5%;
-}
-
-.all-channels-container {
-    margin-top: 2%
-}
-
-.content-sidebar-dm-section {
-    margin-top: 2%
-}
-
-.all-dms-container {
-    margin-top: 2%
-}
-
-.channels-header, .dm-header {
+.content-sidebar-header {
     display: flex;
-    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    border-bottom: 1px solid rgb(151, 145, 145);
+}
+
+.content-sidebar-header > svg {
+    width: 20px;
+    height: 20px;
+    padding-bottom: 6px;
+}
+
+.content-sidebar-header-text {
+    margin: 3% 5%;
+}
+.add-channels {
+    margin: 3% 8%;
+}
+
+.add-channels > svg {
+    width: 15px;
+    height: 15px;
+    padding-top: 5px;
+}
+
+.add-dm-channels > svg {
+    width: 15px;
+    height: 15px;
+    padding-top: 5px;
+}
+
+.channels-header {
+    margin: 3% 5%;
+    display: flex;
     align-items: center;
 }
 
-.channels-header > * {
-    padding: 2%
+.dm-header {
+    margin: 5% 3% 3% 3%;
 }
 
-.dm-header > * {
-    padding: 2%
+.add-dm-channels {
+    margin: 3% 8%;
 }

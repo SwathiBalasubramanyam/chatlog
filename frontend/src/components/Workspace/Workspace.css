@@ -2,14 +2,10 @@
     width: 100vw;
     height: 100vh;
     overflow: hidden;
+    background-color: #863e86;
 }
 
 .workspace-main-page-content {
     display: flex
-}
-
-.workspace-main-page-content svg {
-    width: 30px;
-    height: 30px;
 }
 

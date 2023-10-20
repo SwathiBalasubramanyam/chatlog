@@ -28,7 +28,7 @@ footer, header, hgroup, menu, nav, section {
 body {
 	font-family: Slack-Circular-Pro,"Helvetica Neue",Helvetica,"Segoe UI",Tahoma,Arial,sans-serif;
     font-size: 16px;
-	line-height: 1;
+	line-height: 1.4;
 }
 ol, ul {
 	list-style: none;
@@ -130,5 +130,6 @@ strong {
 }
 
 button {
+    border-style: none;
     font-size: 16px;
 }
