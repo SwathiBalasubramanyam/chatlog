@@ -15,13 +15,18 @@ const ContentSideBar = () => {
     const sessionChannel = useSelector((state) => state.session.currentChannel);
     const channels = Object.values(useSelector(getChannels));
 
-    useEffect(() => {
-        if(channels.length && !sessionChannel){
-            let firstChannel = channels[0]
-            dispatch(setCurrentChannel(firstChannel))
-            dispatch(fetchMessages(firstChannel.id))
-        }
-    }, [sessionChannel, channels])
+    // useEffect(() => {
+    //     if(sessionChannel && sessionWorkspace){
+    //         dispatch(fetchMessages(sessionChannel.id))
+    //     }
+    //     if(!sessionChannel && channels.length){
+    //         let firstChannel = channels[0]
+    //         dispatch(fetchMessages(firstChannel.id)).then(() => {
+    //             dispatch(setCurrentChannel(firstChannel))
+    //         })
+
+    //     }
+    // }, [sessionChannel, channels])
 
     if(!sessionChannel){
         return null

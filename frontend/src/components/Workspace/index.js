@@ -6,9 +6,9 @@ import ToolBar from "./ToolBar";
 import SideBar from "./SideBar";
 import ContentSideBar from "./ContentSideBar";
 import MessagesComp from "./MessagesComp";
-import "./Workspace.css";
-import { setCurrentChannel } from "../../store/session";
 import { fetchMessages } from "../../store/messages";
+import { setCurrentChannel } from "../../store/session";
+import "./Workspace.css";
 
 const Workspace = () => {
     const dispatch = useDispatch();
@@ -17,7 +17,13 @@ const Workspace = () => {
     const sessionWorkspace = useSelector((state) => state.session.currentWorkspace);
 
     useEffect(() => {
-        dispatch(fetchWorkspace(workspaceId))
+        dispatch(fetchWorkspace(workspaceId)).then((data) => {
+            let firstChannelId = Object.keys(data.channels)[0]
+            let firstChannel = data.channels[firstChannelId]
+            dispatch(fetchMessages(firstChannelId)).then(() => {
+                dispatch(setCurrentChannel(firstChannel))
+            })
+        })
     }, [workspaceId])
     
     if (!sessionUser){

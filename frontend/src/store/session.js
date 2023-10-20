@@ -74,7 +74,7 @@ export const updateUser = (userObj) => {
         })
         const data = await response.json()
         dispatch(setCurrentUser(data.user));
-        return response;
+        return data;
     }
 }
 

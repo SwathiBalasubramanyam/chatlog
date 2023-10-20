@@ -6,19 +6,18 @@ import * as messageActions from "../../../../store/messages";
 
 const ChannelItem = ({channel}) => {
     const dispatch = useDispatch();
-    const sessionWorkspace = useSelector((state) => state.session.currentWorkspace);
     const sessionChannel = useSelector((state) => state.session.currentChannel);
     const workspaceMembers = useSelector(getWorkspaceMems);
     let className = sessionChannel.id === channel.id ? "channel-item is-selected": "channel-item"
     let channelName = channel.name
     if(!channel.isChannel) {
-        channelName = channel.memberIds.map(memId => workspaceMembers[memId]["fullName"] || workspaceMembers[memId]["email"])
-        channelName = channelName.join(", ")
+        channelName = channel.memberIds.map(memId => workspaceMembers[memId]["email"]).join(", ")
     }
 
     const handleClick = () => {
-        dispatch(setCurrentChannel(channel));
-        dispatch(messageActions.fetchMessages(channel.id))
+        dispatch(messageActions.fetchMessages(channel.id)).then(() => {
+            dispatch(setCurrentChannel(channel));
+        })
     }
 
     return (

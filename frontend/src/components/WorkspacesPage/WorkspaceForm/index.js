@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import * as workspaceActions from "../../../store/workspaces";
 import "./WorkspaceForm.css";
 import * as modalActions from "../../../store/modal";
+import { unwrapResult } from '@reduxjs/toolkit';
+import FormError from "../../UserForm/FormError";
 
 const WorkspaceForm = ({edit=false}) => {
     const dispatch = useDispatch();
@@ -10,19 +12,46 @@ const WorkspaceForm = ({edit=false}) => {
     const [name, setName] = useState(edit ? sessionWorkspace.name : "");
     const [url, setUrl] = useState(edit? sessionWorkspace.url : "");
     const [icon, setIcon] = useState(edit? sessionWorkspace.icon : "");
+    const [errors, setErrors] = useState([]);
+
 
     const handleCreate = (e) => {
         e.preventDefault();
-        dispatch(modalActions.closeModal());
+        let action ;
+        let objToSend;
         if (edit) {
-            dispatch(workspaceActions.updateWorkspace({...sessionWorkspace, name: name, url: url, icon: icon}));
+            action = workspaceActions.updateWorkspace;
+            objToSend = {...sessionWorkspace, name: name, url: url, icon: icon}
         } else {
-            dispatch(workspaceActions.createWorkspace({name: name, url: url || `${name}/chatlog.com`, icon: icon || `${name.slice(0,2).toUpperCase()}`}));
+            action = workspaceActions.createWorkspace;
+            objToSend = {
+                name: name, 
+                url: url || `${name}/chatlog.com`, 
+                icon: icon.slice(0,2).toUpperCase() || `${name.slice(0,2).toUpperCase()}`}
         }
+        dispatch(action(objToSend))
+            .then(unwrapResult)
+            .then(() => {
+                dispatch(modalActions.closeModal());
+            })
+            .catch(async(res) => {
+                let data;
+                try {
+                    data = await res.clone().json();
+                } catch {
+                    data = await res.text();
+                }
+                if (data?.errors) setErrors(data.errors);
+                else if (data) setErrors([data]);
+                else setErrors([res.statusText]);
+            })
     }
 
     return (
         <form className="create-workspace-form" onSubmit={handleCreate}>
+            <ul>
+                {errors.map(error => <FormError error={error}/>)}
+            </ul>
             <div><strong>What's the name of your company or team?</strong></div>
             <div>This will be the name of your ChatLog workspace, choose something that your team will recognize.</div>
             <input type="text" onChange={(e) => setName(e.target.value)} 

@@ -1,7 +1,7 @@
 class Channel < ApplicationRecord
 
     validates :name, presence: true, 
-        uniqueness: {scope: :workspace_id, message: "Name must be unique for a workspace"}
+        uniqueness: {scope: :workspace_id, message: "must be unique for a workspace"}
 
     belongs_to :owner,
         class_name: :User,

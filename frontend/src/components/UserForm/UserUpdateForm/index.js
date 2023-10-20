@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import FormError from '../FormError';
 import "./UserUpdateForm.css";
 import * as modalActions from "../../../store/modal";
+import { unwrapResult } from '@reduxjs/toolkit'
 
 function UpdateUserForm() {
     const dispatch = useDispatch();
@@ -11,12 +12,15 @@ function UpdateUserForm() {
     const [user, setUser] = useState(sessionUser);
     const [errors, setErrors] = useState([]);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault();
         setErrors([]);
-        return dispatch(sessionActions.updateUser(user))
+        dispatch(sessionActions.updateUser(user))
+            .then(unwrapResult)
+            .then(() => {
+                dispatch(modalActions.closeModal())
+            })
             .catch(async(res) => {
-                debugger;
                 let data;
                 try {
                     data = await res.clone().json();

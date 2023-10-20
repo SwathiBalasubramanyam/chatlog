@@ -19,7 +19,10 @@ const MessagesComp = () => {
     const sessionChannel = useSelector(state => state.session.currentChannel);
     const messages = Object.values(useSelector(getChannelMessages)) || [];
     const workspaceMembers = useSelector(getWorkspaceMems);
+
     const [messageText, setMessageText] = useState("")
+    const [isOwner, setIsOwner] = useState("")
+    const [channelName, setChannelName] = useState("")
 
     useEffect(() => {
         let sub;
@@ -27,32 +30,17 @@ const MessagesComp = () => {
             sub = consumer.subscriptions.create(
                 { channel: 'MessageChannel', channel_id: sessionChannel.id},
                 { received: broadcast => dispatch(messageActions.receiveMessage(broadcast))});
+
+            setIsOwner(sessionUser.id === sessionChannel.ownerId)
+
+            let channelName = sessionChannel.name
+            if(!sessionChannel.isChannel) {
+                channelName = sessionChannel.memberIds.map(memId => workspaceMembers[memId]["email"]).join(", ")
+            }
+            setChannelName(channelName)
         }
         return () => sub?.unsubscribe()
     }, [sessionChannel])
-
-    if(!sessionWorkspace || !sessionChannel){
-        return null
-    }
-
-    if(sessionChannel.workspaceId != sessionWorkspace.id){
-        return null
-    }
-
-    if(!Object.keys(workspaceMembers).length){
-        return null
-    }
-
-    if(Object.values(workspaceMembers)[0].workspaceId != sessionWorkspace.id){
-        return null
-    }
-
-    const isOwner = sessionUser.id === sessionChannel.ownerId;
-    let channelName = sessionChannel.name
-    if(!sessionChannel.isChannel) {
-        channelName = sessionChannel.memberIds.map(memId => workspaceMembers[memId]["fullName"] || workspaceMembers[memId]["email"])
-        channelName = channelName.join(", ")
-    }
 
     const handleDelete = () => {
         dispatch(channelActions.deleteChannel(sessionWorkspace.id, sessionChannel.id))
@@ -68,8 +56,8 @@ const MessagesComp = () => {
         dispatch(messageActions.createMessage(messageObj.channelId, messageObj));
         setMessageText("");
     }
-
-    return (
+    
+    return (sessionWorkspace && sessionChannel && sessionChannel.workspaceId == sessionWorkspace.id) ? (
         <div className="messages-section">
             <div className="messages-header">
                 <div><strong>{channelName}</strong></div>
@@ -86,7 +74,7 @@ const MessagesComp = () => {
             </div>
             <div className="messages-container">
                 {messages.map(message => {
-                    let author = workspaceMembers[message.ownerId]
+                    let author = workspaceMembers[message.ownerId] || {}
                     return (
                         <div className="message-item">
                             <div className="message-header">
@@ -98,7 +86,6 @@ const MessagesComp = () => {
                         </div>
                     )
                 })}
-
             </div>
             <div>
                 <form onSubmit={handleCreateMessage}>
@@ -107,7 +94,7 @@ const MessagesComp = () => {
                 </form>
             </div>
         </div>
-    )
+    ) : null
 }
 
 export default MessagesComp;

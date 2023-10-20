@@ -16,12 +16,13 @@ const AddMemberForm = ({directMessage=false}) => {
     const sessionUser = useSelector(state => state.session.currentUser);
     const [matchedMemList, setMatchedMemList] = useState([]);
     const [selectedMemList, setSelectedMemList] = useState({});
+    const [channelMembers, setChannelMembers] = useState([])
     
     useEffect(()=> {
-        dispatch(fetchWorkspace(sessionChannel.workspaceId))
+        dispatch(fetchWorkspace(sessionChannel.workspaceId)).then(() => {
+            setChannelMembers(sessionChannel.memberIds)
+        })
     }, [sessionChannel])
-
-    const channelMembers = sessionChannel.memberIds;
 
     const getSearchMemList = () => {
         return Object.values(workspaceMembers).filter(
@@ -57,16 +58,12 @@ const AddMemberForm = ({directMessage=false}) => {
 
         let newChannelMems = [...memberIds]
         newChannelMems.push(sessionUser.id)
-        
         let chName = newChannelMems.sort().join("")
 
         if(directMessage){
             let alreadyExists = Object.values(channels).filter(ch => ch.name === chName)
             if(alreadyExists.length){
-                console.log(alreadyExists[0]);
-                let something = dispatch(setCurrentChannel(channels[alreadyExists[0]]))
-                console.log("this is something");
-                console.log(something);
+                dispatch(setCurrentChannel(alreadyExists[0]))
                 dispatch(modalActions.closeModal());
             } else {
                 dispatch(channelActions.createChannel(sessionChannel.workspaceId, {
@@ -78,7 +75,6 @@ const AddMemberForm = ({directMessage=false}) => {
                     dispatch(channelMemberActions.createChannelMembers(data.channel.id, memberIds)).then(() => dispatch(modalActions.closeModal()))
                 })
             }
-
         } else {
             dispatch(channelMemberActions.createChannelMembers(sessionChannel.id, memberIds)).then(() => dispatch(modalActions.closeModal()))
         }

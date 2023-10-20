@@ -4,6 +4,8 @@ import FormError from '../../UserForm/FormError';
 import "./ChannelForm.css";
 import * as modalActions from "../../../store/modal";
 import * as channelActions from "../../../store/channels";
+import { unwrapResult } from '@reduxjs/toolkit';
+
 
 function ChannelForm({update=false}) {
     const dispatch = useDispatch();
@@ -34,7 +36,11 @@ function ChannelForm({update=false}) {
         setErrors([]);
         channel["isChannel"] = true;
 
-        return dispatch(thunkAction(sessionWorkspace.id, channel))
+        dispatch(thunkAction(sessionWorkspace.id, channel))
+            .then(unwrapResult)
+            .then(() => {
+                dispatch(modalActions.closeModal())
+            })
             .catch(async(res) => {
                 let data;
                 try {
@@ -46,11 +52,6 @@ function ChannelForm({update=false}) {
                 else if (data) setErrors([data]);
                 else setErrors([res.statusText]);
             })
-            .then(() => {
-                if(errors.length === 0) {
-                    dispatch(modalActions.closeModal())
-                }
-            });
     }
 
     return (
