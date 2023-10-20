@@ -7,6 +7,7 @@ import * as channelMemberActions from "../../store/channelMembers";
 import * as modalActions from "../../store/modal";
 import { getChannels } from "../../store/channels";
 import { setCurrentChannel } from "../../store/session";
+import "./AddMemberForm.css";
 
 const AddMemberForm = ({directMessage=false}) => {
     const dispatch = useDispatch();
@@ -82,14 +83,18 @@ const AddMemberForm = ({directMessage=false}) => {
 
     return (
         <div className="add-member-form">
-            <div className="selected-members-container">This is selected members conatiner
+            <div className="selected-members-container">
                 <div className="selected-members-holder">
-                    {Object.values(selectedMemList).join(",")}
+                    {Object.values(selectedMemList).join(" ")}
+                </div>
+                
+            </div>
+            <div className="search-members-conatiner"> Search members by email
+                <div className="search-members-container-input">
+                    <input type="text" placeholder="Enter email"onChange={handleOnChange}>
+                    </input>
                     <button onClick={handleAddMembers}>Add Members</button>
                 </div>
-            </div>
-            <div className="search-members-conatiner"> This is search members conatiner
-                <input type="text" onChange={handleOnChange}></input>
                 {matchedMemList.map(mem => {
                     return (
                         <li key={mem.memberId} value={mem.memberId} onClick={handleSelectMembers}>{mem.email}</li>

@@ -24,6 +24,7 @@ const MessagesComp = () => {
     const [messageText, setMessageText] = useState("")
     const [isOwner, setIsOwner] = useState("")
     const [channelName, setChannelName] = useState("")
+    const [memberCnt, setMemberCnt] = useState(0)
 
     useEffect(() => {
         let sub;
@@ -39,6 +40,7 @@ const MessagesComp = () => {
                 channelName = sessionChannel.memberIds.map(memId => workspaceMembers[memId]["email"]).join(", ")
             }
             setChannelName(channelName)
+            setMemberCnt(sessionChannel.memberIds.length)
         }
         return () => sub?.unsubscribe()
     }, [sessionChannel])
@@ -62,15 +64,21 @@ const MessagesComp = () => {
         <div className="messages-section">
             <div className="messages-header">
                 <div className="messages-header-channel-name"><strong>{channelName}</strong>
-                    {isOwner && sessionChannel.isChannel && !sessionChannel.isDefault &&
-                        <AiOutlineEdit onClick={(e) => dispatch(modalActions.openModal("updateChannel"))}/>
-                    }
-                    {isOwner && sessionChannel.isChannel && !sessionChannel.isDefault &&
-                        <RiDeleteBinLine onClick={handleDelete}></RiDeleteBinLine>
-                    }
-                    {sessionChannel.isChannel && !sessionChannel.isDefault && 
-                        <BiSolidUserRectangle onClick={(e) => dispatch(modalActions.openModal("addMembers"))}></BiSolidUserRectangle>
-                    }
+                    <div className="messages-header-channel-name-details">
+
+                        {isOwner && sessionChannel.isChannel && !sessionChannel.isDefault &&
+                            <AiOutlineEdit onClick={(e) => dispatch(modalActions.openModal("updateChannel"))}/>
+                        }
+                        {isOwner && sessionChannel.isChannel && !sessionChannel.isDefault &&
+                            <RiDeleteBinLine onClick={handleDelete}></RiDeleteBinLine>
+                        }
+                        {sessionChannel.isChannel && !sessionChannel.isDefault && 
+                            <BiSolidUserRectangle onClick={(e) => dispatch(modalActions.openModal("addMembers"))}></BiSolidUserRectangle>
+                        }
+                    </div>
+                    <div className="messages-header-channel-member-details">
+                        {sessionChannel.memberIds.map(id => <BiSolidUserRectangle/>)} {memberCnt} {memberCnt > 1 ? "members": "member"}
+                    </div>
                 </div>
                 <div className="messages-header-channel-description">{sessionChannel.description || ""}</div>
                 
