@@ -50,7 +50,7 @@ Ability to add a member of the work-space into the channel.
 A default direct message channel, with only user as member is created.
 ### 5. Messages
 Users have the ability to create a Message in the channel/direct messages channel or as a reply to the message.
-channel members can read the messages.
+channel members can read the messages.<video src="20.10.2023_17.03.10_REC.mp4" controls title="Title"></video>
 
 ## Highlighted Features
 #### Creating default channels
@@ -74,7 +74,7 @@ When creating a workspace, backend also creates few default channels, a direct m
 
 ```
 #### channel vs Direct Message:
-I have 
+channels and direct messages are the same behind the hood. When its a direct message, I name it by concatening all the memberIds. So this has to be unique all the time. The below code checks if there is a channel with the given members and then switches the channel else creates one for them.
 #### Code Snippets
 ```javascript
   const handleAddMembers = (e) => {
@@ -107,26 +107,6 @@ I have
         }
     }
 ```
-##### Explanation
-The Jbuilder code is what is sent to the front end to be used as a data base for react componenets.
-- The first step is seperating the @products into many products, and extracting the same data for each
-- Then, I extract the id, title, description, and other information about each product
-- I also extract information about the products such as the user that the proudct belongs to, as well as the category that the product belongs to
-- The above point would usually cause more fetches to get this information, but the next section of code shows how it is all being fetched at once
-The Products Controller will control what gets sent to the jbuilder when index route is called
-- The frist thing that is done is @products is being initialzed by calling Proudct.all, which is all of the products.
-- In the middle however, we are also calling .includes(:category, :user). What this will do is preload the category and user associations/information attached to the products. This will cause only one fetch as we have all the information that the Jbulider is asking for
----
-### Dynamic Shopping Cart
-#### Challenges
-Implementing a shopping cart that was both user-specific and CRUD-capable was a considerable challenge.
-#### Solutions
-For tracking cart items based on the user, I utilized Rails sessions tied to unique user IDs. CRUD operations were then handled using Rails routes and controllers to ensure a seamless user experience.
-##### Code Snippets
-```javascript
-
-```
-##### Explanation
 
 ## Future Directions
 - Ability to leave a channel
