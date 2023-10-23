@@ -12,10 +12,14 @@
 - [Future Directions](#future-directions)
 ---
 ## Overview
-ChatLog is a full stack clone of the popular business messaging application, Slack. Slack is a workplace communication tool that allows users to collaborate and connect with one another through a variety of ways. Inspired by Slack, the core feature of ChatLog is the ability to send messages to another user or to a channel they have access to. 
+
+ChatLog is a full stack clone of the popular business messaging application, Slack. Slack is a workspace communication tool that allows users to collaborate and connect with one another through a variety of ways. Inspired by slack, the core feature of ChatLog is the ability to send messages to another user or to a channel they have access to.
+
 ---
 ## Live Demo
+
 Check out the live website [here](https://chatlog.onrender.com/).
+
 ---
 ## Technologies Used
 - React.js
@@ -50,7 +54,9 @@ Ability to add a member of the work-space into the channel.
 A default direct message channel, with only user as member is created.
 ### 5. Messages
 Users have the ability to create a Message in the channel/direct messages channel or as a reply to the message.
-channel members can read the messages.<video src="20.10.2023_17.03.10_REC.mp4" controls title="Title"></video>
+channel members can read the messages.
+
+<video src="20.10.2023_17.03.10_REC.mp4" controls title="Title"></video>
 
 ## Highlighted Features
 #### Creating default channels
