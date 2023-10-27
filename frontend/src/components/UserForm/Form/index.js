@@ -16,8 +16,8 @@ function Form({thunkAction, rightCol=false, pageHeaderText, ctaText}) {
     let passwordErrors = [];
     let emailErrors = [];
 
-    if (errors.length > 0 && typeof errors[0] !== "string") {
-        passwordErrors = ["Invalid credentials"]
+    if (errors.length == 1 && typeof errors[0] === "string") {
+        emailErrors = errors
     } else {
         passwordErrors = errors.filter(error => error.includes("Password"));
         emailErrors = errors.filter(error => error.includes("Email"));
@@ -26,6 +26,7 @@ function Form({thunkAction, rightCol=false, pageHeaderText, ctaText}) {
     if (sessionUser) return <Redirect to="/signin/workspaces" />;
 
     const handleSubmit = (e) => {
+        console.log("is this the form ??")
         e.preventDefault();
         setErrors([]);
         return dispatch(thunkAction(email, password))

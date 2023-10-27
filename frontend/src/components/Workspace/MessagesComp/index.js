@@ -37,7 +37,7 @@ const MessagesComp = () => {
 
             let channelName = "# " + sessionChannel.name
             if(!sessionChannel.isChannel) {
-                channelName = sessionChannel.memberIds.map(memId => workspaceMembers[memId]["email"]).join(", ")
+                channelName = sessionChannel.memberIds.map(memId => workspaceMembers[memId] ? workspaceMembers[memId]["email"] : "").join(", ")
             }
             setChannelName(channelName)
             setMemberCnt(sessionChannel.memberIds.length)

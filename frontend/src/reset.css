@@ -133,3 +133,7 @@ button {
     border-style: none;
     font-size: 16px;
 }
+
+button:hover {
+    cursor: pointer;
+}
