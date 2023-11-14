@@ -8,15 +8,18 @@ import Workspace from "./components/Workspace";
 import Modal from "./components/Modal";
 import AddMemberForm from "./components/AddMemberForm";
 import "./reset.css";
+import RouteChangeTracker from "./components/RouteChangeTracker";
 import ReactGA from 'react-ga';
 
 const TRACKING_ID = "G-1XL1V2E1QJ";
 ReactGA.initialize(TRACKING_ID);
 
 const App = () => {
-  ReactGA.pageview('test-init-pageview')
+  ReactGA.pageview('test-init-pageview');
+
   return (
     <>
+      <RouteChangeTracker/>
       <Modal></Modal>
       <Switch>
         <Route path="/addmembers">
