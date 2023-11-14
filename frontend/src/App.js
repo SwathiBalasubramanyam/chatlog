@@ -8,8 +8,13 @@ import Workspace from "./components/Workspace";
 import Modal from "./components/Modal";
 import AddMemberForm from "./components/AddMemberForm";
 import "./reset.css";
+import ReactGA from 'react-ga';
+
+const TRACKING_ID = "G-1XL1V2E1QJ";
+ReactGA.initialize(TRACKING_ID);
 
 const App = () => {
+  ReactGA.pageview('test-init-pageview')
   return (
     <>
       <Modal></Modal>
